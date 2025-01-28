@@ -5,7 +5,7 @@ using UnityEngine;
 internal class PlayerController : MonoBehaviour {
     internal static PlayerController Instance { get; }
 
-    //variable
+    [Header("---------- Variable ----------")]
     Vector2 moveSpeed = Vector2.zero;
     float maxSpeed = 9f, giaToc = 5f, giaTocGiam = 15f;
 
