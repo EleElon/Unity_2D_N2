@@ -10,6 +10,7 @@ internal class GunController : MonoBehaviour {
     float rotateOffset = 180f;
     float maxBullets = 20;
     float bulletsRemaining;
+    int bulletShooted;
     float overLoad;
     float shootingDelay = 0.15f;
     float nextShoot;
@@ -18,6 +19,9 @@ internal class GunController : MonoBehaviour {
     [Header("---------- Component ----------")]
     [SerializeField] Transform shootingPoint;
     [SerializeField] GameObject bulletPrefab;
+
+    // [Header("---------- Element ----------")]
+    // ObjectPooling bulletPool;
 
     private void Awake() {
         Instance = this;
@@ -35,7 +39,7 @@ internal class GunController : MonoBehaviour {
     }
 
     void HandleShooting() {
-        if (Input.GetMouseButtonDown(0) && bulletsRemaining > 0 && overLoad < 100 && Time.time > nextShoot && !reloading) {
+        if (Input.GetMouseButtonDown(0) && bulletsRemaining > 0 /*&& overLoad < 100*/ && Time.time > nextShoot && !reloading) {
             nextShoot = Time.time + shootingDelay;
             Shoot();
         }
@@ -70,10 +74,15 @@ internal class GunController : MonoBehaviour {
     }
 
     void Shoot() {
-        Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+        //     Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
 
-        bulletsRemaining--;
-        overLoad += 10;
+        //     bulletsRemaining--;
+        //     // overLoad += 10;
+
+        GameObject bullet = BulletOP.Instance.GetObject();
+        bullet.transform.rotation = shootingPoint.rotation;
+        bullet.transform.position = shootingPoint.position;
+        bulletShooted++;
     }
 
     IEnumerator TimeToLoadBullet() {
@@ -97,5 +106,9 @@ internal class GunController : MonoBehaviour {
 
     internal bool IsReloading() {
         return reloading;
+    }
+
+    internal int IsBulletShooted() {
+        return bulletShooted;
     }
 }

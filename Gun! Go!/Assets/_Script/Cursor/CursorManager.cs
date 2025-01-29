@@ -14,12 +14,8 @@ internal class CursorManager : MonoBehaviour {
 
     private Texture2D currentCursor;
 
-    [Header("---------- Component ----------")]
-    Animator _animator;
-
     private void Awake() {
         Instance = this;
-        _animator = GetComponent<Animator>();
     }
 
     private void Start() {
@@ -57,10 +53,5 @@ internal class CursorManager : MonoBehaviour {
             Cursor.SetCursor(newCursor, hotspot, CursorMode.Auto);
             currentCursor = newCursor;
         }
-
-        bool IsReloadingAnimation = GunController.Instance.IsReloading();
-
-        _animator.SetBool("IsReloading", IsReloadingAnimation);
     }
-
 }
