@@ -22,15 +22,11 @@ internal class BulletsController : MonoBehaviour {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
 
-    void DestroyBullet() {
-        BulletOP.Instance.ReturnObject(gameObject);
-    }
-
     IEnumerator TimeToDestroy() {
         yield return new WaitForSeconds(4f);
 
         if (gameObject.activeSelf) {
-            BulletOP.Instance.ReturnObject(gameObject);
+            PlayerBulletOP.Instance.ReturnBullet(gameObject);
         }
     }
 }

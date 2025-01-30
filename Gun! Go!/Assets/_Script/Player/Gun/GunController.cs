@@ -8,9 +8,9 @@ internal class GunController : MonoBehaviour {
 
     [Header("---------- Variable ----------")]
     float rotateOffset = 180f;
-    float maxBullets = 20;
-    float bulletsRemaining;
-    float shootingDelay = 0.15f;
+    int maxBullets = 20;
+    int bulletsRemaining;
+    float shootDelay = 0.15f;
     float nextShoot;
     bool reloading;
 
@@ -38,7 +38,7 @@ internal class GunController : MonoBehaviour {
 
     void HandleShooting() {
         if (Input.GetMouseButtonDown(0) && bulletsRemaining > 0 /*&& overLoad < 100*/ && Time.time > nextShoot && !reloading) {
-            nextShoot = Time.time + shootingDelay;
+            nextShoot = Time.time + shootDelay;
             Shoot();
         }
     }
@@ -77,7 +77,7 @@ internal class GunController : MonoBehaviour {
         //     bulletsRemaining--;
         //     // overLoad += 10;
 
-        GameObject bullet = BulletOP.Instance.GetObject();
+        GameObject bullet = PlayerBulletOP.Instance.GetBullet();
         bullet.transform.rotation = shootingPoint.rotation;
         bullet.transform.position = shootingPoint.position;
         bulletsRemaining--;

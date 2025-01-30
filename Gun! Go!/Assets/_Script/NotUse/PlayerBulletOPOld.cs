@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-internal class BulletOP : MonoBehaviour {
-    internal static BulletOP Instance { get; private set; }
+internal class PlayerBulletOPOld : MonoBehaviour {
+    internal static PlayerBulletOPOld Instance { get; private set; }
 
     [SerializeField] GameObject bulletPrefab;
     int poolSize = 20;
