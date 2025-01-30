@@ -10,7 +10,7 @@ internal class BulletsController : MonoBehaviour {
     // [Header("---------- Component ----------")]
     // Rigidbody2D _rb;
 
-    private void Start() {
+    private void OnEnable() {
         StartCoroutine(TimeToDestroy());
     }
 
@@ -27,16 +27,10 @@ internal class BulletsController : MonoBehaviour {
     }
 
     IEnumerator TimeToDestroy() {
-        while (true) {
-            // foreach (GameObject obj in ObjectPooling.Instance.GetAllObjects()) {
-            if (gameObject.activeSelf) {
-                yield return new WaitForSeconds(5f);
-                DestroyBullet();
-            }
-            else {
-                yield return null;
-            }
-            // }
+        yield return new WaitForSeconds(4f);
+
+        if (gameObject.activeSelf) {
+            BulletOP.Instance.ReturnObject(gameObject);
         }
     }
 }

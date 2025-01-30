@@ -10,8 +10,6 @@ internal class GunController : MonoBehaviour {
     float rotateOffset = 180f;
     float maxBullets = 20;
     float bulletsRemaining;
-    int bulletShooted;
-    float overLoad;
     float shootingDelay = 0.15f;
     float nextShoot;
     bool reloading;
@@ -82,7 +80,7 @@ internal class GunController : MonoBehaviour {
         GameObject bullet = BulletOP.Instance.GetObject();
         bullet.transform.rotation = shootingPoint.rotation;
         bullet.transform.position = shootingPoint.position;
-        bulletShooted++;
+        bulletsRemaining--;
     }
 
     IEnumerator TimeToLoadBullet() {
@@ -106,9 +104,5 @@ internal class GunController : MonoBehaviour {
 
     internal bool IsReloading() {
         return reloading;
-    }
-
-    internal int IsBulletShooted() {
-        return bulletShooted;
     }
 }

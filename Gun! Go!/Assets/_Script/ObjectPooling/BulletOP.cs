@@ -7,7 +7,7 @@ internal class BulletOP : MonoBehaviour {
     internal static BulletOP Instance { get; private set; }
 
     [SerializeField] GameObject bulletPrefab;
-    int poolSize = 15;
+    int poolSize = 20;
     Queue<GameObject> pool;
 
     private void Awake() {
