@@ -10,12 +10,11 @@ internal class PlayerBulletOP : InitializePool<GameObject> {
 
     private void Awake() {
         Instance = this;
-        InitializeObjectPool(20); 
+        InitializeObjectPool(20);
 
         for (int i = 0; i < poolSize; i++) {
             GameObject obj = CreateNewObject();
-            RestoreObject(obj);
-            pool.Enqueue(obj);
+            ReturnBullet(obj);
         }
     }
 

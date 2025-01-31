@@ -39,6 +39,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 584265131
+    locked: 0
+  - name: Grass
+    uniqueID: 2298354135
+    locked: 0
+  - name: Rock
+    uniqueID: 1962520051
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -50,4 +59,7 @@ TagManager:
     locked: 0
   - name: Gun
     uniqueID: 2133776685
+    locked: 0
+  - name: Tree
+    uniqueID: 3238527965
     locked: 0

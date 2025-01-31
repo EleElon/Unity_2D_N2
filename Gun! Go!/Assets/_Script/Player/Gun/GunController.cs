@@ -16,7 +16,7 @@ internal class GunController : MonoBehaviour {
 
     [Header("---------- Component ----------")]
     [SerializeField] Transform shootingPoint;
-    [SerializeField] GameObject bulletPrefab;
+    // [SerializeField] GameObject bulletPrefab;
 
     // [Header("---------- Element ----------")]
     // ObjectPooling bulletPool;
