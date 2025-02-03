@@ -30,7 +30,7 @@ internal class PlayerBulletOP : InitializePool<GameObject> {
     }
 
     protected override GameObject CreateNewObject() {
-        return GameObject.Instantiate(bulletPrefab);
+        return GameObject.Instantiate(bulletPrefab, transform);
     }
 
     protected override void RestoreObject(GameObject obj) {
