@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-internal abstract class InitializePool<T> : MonoBehaviour where T : class {
+internal abstract class ObjectPool<T> : MonoBehaviour where T : class {
     protected Queue<T> pool;
     protected int poolSize;
 
-    protected void InitializeObjectPool(int size) {
+    protected void InitializePool(int size) {
         poolSize = size;
         pool = new Queue<T>(size);
     }

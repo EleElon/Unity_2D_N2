@@ -3,29 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 internal class PlayerController : MonoBehaviour {
-    internal static PlayerController Instance { get; }
+    internal static PlayerController Instance { get; private set; }
 
-    [Header("---------- Variable ----------")]
+    [Header("---------- Variables ----------")]
     Vector2 moveSpeed = Vector2.zero;
     float maxSpeed = 9f, giaToc = 5f, giaTocGiam = 15f;
 
-    [Header("---------- Component ----------")]
+    int maxHP = 10, currentHP;
+
+    [Header("---------- Components ----------")]
     Rigidbody2D _rb;
     Animator _animator;
     SpriteRenderer _spriteRenderer;
 
-    [Header("---------- Element ----------")]
+    [Header("---------- Elements ----------")]
     bool ismoving;
 
     private void Awake() {
+        Instance = this;
+
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        currentHP = maxHP;
     }
 
     private void Update() {
         HandleMovement();
         UpdateAnimation();
+
+        if (currentHP <= 0) {
+            Die();
+        }
     }
 
     void HandleMovement() {
@@ -71,5 +81,13 @@ internal class PlayerController : MonoBehaviour {
         bool isMovingAnimation = ismoving;
 
         _animator.SetBool("IsMoving", isMovingAnimation);
+    }
+
+    internal void TakeDMG(int dmg) {
+        currentHP -= dmg;
+    }
+
+    void Die() {
+        Destroy(gameObject);
     }
 }

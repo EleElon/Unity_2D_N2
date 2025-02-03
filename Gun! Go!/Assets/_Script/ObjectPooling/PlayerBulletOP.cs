@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-internal class PlayerBulletOP : InitializePool<GameObject> {
+internal class PlayerBulletOP : ObjectPool<GameObject> {
     internal static PlayerBulletOP Instance { get; private set; }
 
     [SerializeField] private GameObject bulletPrefab;
@@ -10,7 +10,7 @@ internal class PlayerBulletOP : InitializePool<GameObject> {
 
     private void Awake() {
         Instance = this;
-        InitializeObjectPool(20);
+        InitializePool(20);
 
         for (int i = 0; i < poolSize; i++) {
             GameObject obj = CreateNewObject();

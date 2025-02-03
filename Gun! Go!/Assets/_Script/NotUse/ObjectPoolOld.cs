@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-internal class ObjectPool<T> where T : Component {
+internal class ObjectPooll<T> where T : Component {
     protected readonly Queue<T> _pool;
     protected readonly System.Func<T> _objectGenerator;
     protected int _maxSize;
 
     // Constructor yêu cầu maxSize phải được cung cấp
-    internal ObjectPool(System.Func<T> objectGenerator, int maxSize) {
+    internal ObjectPooll(System.Func<T> objectGenerator, int maxSize) {
         _objectGenerator = objectGenerator;
         _maxSize = maxSize;
         _pool = new Queue<T>();

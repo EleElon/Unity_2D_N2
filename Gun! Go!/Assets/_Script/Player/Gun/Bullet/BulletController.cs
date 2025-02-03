@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 internal class BulletsController : MonoBehaviour {
-    [Header("---------- Variable ----------")]
+    [Header("---------- Variables ----------")]
     float speed = 7;
 
     // [Header("---------- Component ----------")]

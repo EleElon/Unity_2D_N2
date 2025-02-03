@@ -6,7 +6,7 @@ using UnityEngine;
 internal class GunController : MonoBehaviour {
     internal static GunController Instance { get; private set; }
 
-    [Header("---------- Variable ----------")]
+    [Header("---------- Variables ----------")]
     float rotateOffset = 180f;
     int maxBullets = 20;
     int bulletsRemaining;
@@ -14,7 +14,7 @@ internal class GunController : MonoBehaviour {
     float nextShoot;
     bool reloading;
 
-    [Header("---------- Component ----------")]
+    [Header("---------- Components ----------")]
     [SerializeField] Transform shootingPoint;
     // [SerializeField] GameObject bulletPrefab;
 
