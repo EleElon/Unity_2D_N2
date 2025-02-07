@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 internal abstract class Enemy : MonoBehaviour {
-    
+
     [Header("---------- Variables ----------")]
     protected virtual float moveSpeed { get; } = 2f;
     // protected float moveSpeed = 3f;

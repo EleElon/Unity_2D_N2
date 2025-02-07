@@ -15,25 +15,25 @@ internal class EnemyHPManager : MonoBehaviour {
     float lastDMGTakeTime;
 
     [Header("---------- Components ----------")]
-    BasicEnemy _enemy;
+    IEnemy _enemy;
 
     private void Awake() {
-        _enemy = GetComponentInParent<BasicEnemy>();
+        _enemy = GetComponentInParent<IEnemy>();
 
-        currentHPSlider.maxValue = _enemy.GetEnemyMaxHP();
-        currentHPSlider.value = _enemy.GetEnemyMaxHP();
-        easeHPSlider.maxValue = _enemy.GetEnemyMaxHP();
-        easeHPSlider.value = _enemy.GetEnemyMaxHP();
+        currentHPSlider.maxValue = _enemy.GetEnemiesMaxHP();
+        currentHPSlider.value = _enemy.GetEnemiesMaxHP();
+        easeHPSlider.maxValue = _enemy.GetEnemiesMaxHP();
+        easeHPSlider.value = _enemy.GetEnemiesMaxHP();
     }
 
     private void FixedUpdate() {
-        if (currentHPSlider.value != _enemy.GetEnemyCurrentHP()) {
-            currentHPSlider.value = Mathf.Lerp(currentHPSlider.value, _enemy.GetEnemyCurrentHP(), hpLerpSpeed);
+        if (currentHPSlider.value != _enemy.GetEnemiesCurrentHP()) {
+            currentHPSlider.value = Mathf.Lerp(currentHPSlider.value, _enemy.GetEnemiesCurrentHP(), hpLerpSpeed);
         }
 
-        if (Time.time - lastDMGTakeTime >= timeWaitForEaseHP && _enemy.GetEnemyCurrentHP() != 0) {
+        if (Time.time - lastDMGTakeTime >= timeWaitForEaseHP && _enemy.GetEnemiesCurrentHP() != 0) {
             if (currentHPSlider.value != easeHPSlider.value) {
-                easeHPSlider.value = Mathf.Lerp(easeHPSlider.value, _enemy.GetEnemyCurrentHP(), easeLerpSpeed);
+                easeHPSlider.value = Mathf.Lerp(easeHPSlider.value, _enemy.GetEnemiesCurrentHP(), easeLerpSpeed);
             }
         }
     }

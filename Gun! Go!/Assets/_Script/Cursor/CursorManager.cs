@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 internal class CursorManager : MonoBehaviour {
-    
+
     internal static CursorManager Instance { get; private set; }
 
     [Header("---------- Components ----------")]

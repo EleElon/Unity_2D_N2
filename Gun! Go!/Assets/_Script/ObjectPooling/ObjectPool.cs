@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 internal abstract class ObjectPool<T> : MonoBehaviour where T : class {
-    
+
     protected Queue<T> pool;
     protected int poolSize;
 
