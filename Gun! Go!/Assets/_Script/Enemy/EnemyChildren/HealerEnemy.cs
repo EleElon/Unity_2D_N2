@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-internal class EnergyEnemy : Enemy, IEnemy {
+internal class HealerEnemy : Enemy, IEnemy {
 
     [Header("---------- Variables ----------")]
     // protected float moveSpeedOfBasicEnemy = 0.2f;
+    protected override float moveSpeed { get; } = 1f;
     protected int maxHP = 12;
     protected int currentHP;
+    int healValue = 10;
 
     public int GetEnemiesMaxHP() => maxHP;
     public int GetEnemiesCurrentHP() => currentHP;
 
     [Header("---------- Components ----------")]
     EnemyHPManager _enemyHPManager;
-    // [SerializeField] GameObject energyObject;
+    [SerializeField] GameObject energyObject;
 
     private void Awake() {
         currentHP = maxHP;
@@ -39,13 +41,9 @@ internal class EnergyEnemy : Enemy, IEnemy {
     }
 
     protected override void Die() {
-        // if (energyObject != null) {
-            // GameObject energy = Instantiate(energyObject, transform.position, Quaternion.identity);
-            // Destroy(energy, 10f);
-            GameObject energy = EnergyOP.Instance.GetEnergy();
-            energy.transform.position = gameObject.transform.position;
-        // }
         base.Die();
+
+        PlayerController.Instance.Heal(healValue);
     }
 
     internal override void TakeDMG(int dmg) {

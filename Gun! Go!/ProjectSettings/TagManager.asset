@@ -68,9 +68,9 @@ TagManager:
   - name: Tree
     uniqueID: 3238527965
     locked: 0
-  - name: HPBar
-    uniqueID: 1875592823
-    locked: 0
   - name: Energy
     uniqueID: 1956983437
+    locked: 0
+  - name: HPBar
+    uniqueID: 1875592823
     locked: 0

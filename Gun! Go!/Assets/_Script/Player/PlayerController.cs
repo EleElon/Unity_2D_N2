@@ -34,6 +34,10 @@ internal class PlayerController : MonoBehaviour {
         if (currentHP <= 0) {
             Die();
         }
+
+        if (currentHP > maxHP) {
+            currentHP = maxHP;
+        }
     }
 
     void HandleMovement() {
@@ -83,6 +87,10 @@ internal class PlayerController : MonoBehaviour {
 
     internal void TakeDMG(int dmg) {
         currentHP -= dmg;
+    }
+
+    internal void Heal(int healValue) {
+        currentHP += healValue;
     }
 
     void Die() {
