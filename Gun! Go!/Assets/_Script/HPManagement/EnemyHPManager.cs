@@ -11,17 +11,19 @@ internal class EnemyHPManager : MonoBehaviour {
     [Header("---------- Variables ----------")]
     float easeLerpSpeed = 0.01f;
     float hpLerpSpeed = 1.1f;
-    float timeWaitForEaseHP = 3f;
+    float timeWaitForEaseHP = 1.7f;
     float lastDMGTakeTime;
 
     [Header("---------- Components ----------")]
     BasicEnemy _enemy;
 
     private void Awake() {
+        _enemy = GetComponentInParent<BasicEnemy>();
+
         currentHPSlider.maxValue = _enemy.GetEnemyMaxHP();
         currentHPSlider.value = _enemy.GetEnemyMaxHP();
         easeHPSlider.maxValue = _enemy.GetEnemyMaxHP();
-        easeHPSlider.value = _enemy.GetEnemyCurrentHP();
+        easeHPSlider.value = _enemy.GetEnemyMaxHP();
     }
 
     private void FixedUpdate() {
@@ -36,11 +38,7 @@ internal class EnemyHPManager : MonoBehaviour {
         }
     }
 
-    internal void SetEnemy(BasicEnemy enemy) {
-        _enemy = enemy;
-    }
-
     internal void SetLastDMGTakeDMG(float time) {
-        lastDMGTakeTime += time;
+        lastDMGTakeTime = time;
     }
 }

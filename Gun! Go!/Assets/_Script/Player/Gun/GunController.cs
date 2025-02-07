@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 internal class GunController : MonoBehaviour {
+
     internal static GunController Instance { get; private set; }
 
     [Header("---------- Variables ----------")]
@@ -17,8 +18,6 @@ internal class GunController : MonoBehaviour {
     [Header("---------- Components ----------")]
     [SerializeField] Transform shootingPoint;
     // [SerializeField] GameObject bulletPrefab;
-
-    // [Header("---------- Element ----------")]
     // ObjectPooling bulletPool;
 
     private void Awake() {

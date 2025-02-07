@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 internal class PlayerBulletOP : ObjectPool<GameObject> {
+    
     internal static PlayerBulletOP Instance { get; private set; }
 
     [SerializeField] private GameObject bulletPrefab;

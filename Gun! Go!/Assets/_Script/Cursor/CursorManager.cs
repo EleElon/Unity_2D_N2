@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 internal class CursorManager : MonoBehaviour {
+    
     internal static CursorManager Instance { get; private set; }
 
-    [Header("---------- Variable ----------")]
+    [Header("---------- Components ----------")]
     [SerializeField] Texture2D normalCursor;
     [SerializeField] Texture2D shootCursor;
     [SerializeField] Texture2D reloadCursor;

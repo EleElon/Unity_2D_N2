@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Gun! Go!.sln"
+    "dotnet.defaultSolution": "Gun! Go!.sln",
+    "git.ignoreLimitWarning": true
 }

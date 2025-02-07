@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 internal abstract class Enemy : MonoBehaviour {
-    protected float moveSpeed = 2f;
+    
+    [Header("---------- Variables ----------")]
+    protected virtual float moveSpeed { get; } = 2f;
+    // protected float moveSpeed = 3f;
 
     protected virtual void Start() {
 
@@ -15,14 +18,18 @@ internal abstract class Enemy : MonoBehaviour {
 
     protected void MoveToPlayer() {
         if (PlayerController.Instance != null) {
-            transform.position = Vector2.MoveTowards(transform.position, PlayerController.Instance.transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, PlayerController.Instance.transform.position, GetMoveSpeed() * Time.deltaTime);
             FlipEnemy();
         }
     }
-    protected void FlipEnemy() {
+    protected virtual void FlipEnemy() {
         if (PlayerController.Instance != null) {
             transform.localScale = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? -1 : 1, 1, 1);
         }
+    }
+
+    protected virtual float GetMoveSpeed() {
+        return moveSpeed;
     }
 
     protected virtual void Die() {

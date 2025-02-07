@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 internal class PlayerController : MonoBehaviour {
+
     internal static PlayerController Instance { get; private set; }
 
     [Header("---------- Variables ----------")]
     Vector2 moveSpeed = Vector2.zero;
     float maxSpeed = 9f, giaToc = 5f, giaTocGiam = 15f;
-
     int maxHP = 10, currentHP;
+    bool ismoving;
 
     [Header("---------- Components ----------")]
     Rigidbody2D _rb;
     Animator _animator;
     SpriteRenderer _spriteRenderer;
-
-    [Header("---------- Elements ----------")]
-    bool ismoving;
 
     private void Awake() {
         Instance = this;
