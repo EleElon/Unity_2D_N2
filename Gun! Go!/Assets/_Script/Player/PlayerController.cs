@@ -9,7 +9,8 @@ internal class PlayerController : MonoBehaviour {
     [Header("---------- Variables ----------")]
     Vector2 moveSpeed = Vector2.zero;
     float maxSpeed = 9f, giaToc = 5f, giaTocGiam = 15f;
-    int maxHP = 10, currentHP;
+    int maxHP = 100, currentHP;
+    int maxEnergy = 50, currentEnergy;
     bool ismoving;
 
     [Header("---------- Components ----------")]
@@ -37,6 +38,10 @@ internal class PlayerController : MonoBehaviour {
 
         if (currentHP > maxHP) {
             currentHP = maxHP;
+        }
+
+        if (currentEnergy > maxEnergy) {
+            currentEnergy = maxEnergy;
         }
     }
 
@@ -91,6 +96,10 @@ internal class PlayerController : MonoBehaviour {
 
     internal void Heal(int healValue) {
         currentHP += healValue;
+    }
+
+    internal void TakeEnergy(int energy) {
+        currentEnergy += energy;
     }
 
     void Die() {
