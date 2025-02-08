@@ -11,7 +11,7 @@ internal class ExplosionOP : ObjectPool<GameObject> {
 
     private void Awake() {
         Instance = this;
-        InitializePool(10);
+        InitializePool(7);
 
         for (int i = 0; i < poolSize; i++) {
             GameObject obj = CreateNewObject();

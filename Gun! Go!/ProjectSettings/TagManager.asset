@@ -72,6 +72,9 @@ TagManager:
   - name: Energy
     uniqueID: 1956983437
     locked: 0
+  - name: FX
+    uniqueID: 1350158481
+    locked: 0
   - name: HPBar
     uniqueID: 1875592823
     locked: 0

@@ -11,7 +11,7 @@ internal class EnergyManager : MonoBehaviour {
         yield return new WaitForSeconds(10f);
 
         if (gameObject.activeSelf) {
-            PlayerBulletOP.Instance.ReturnBullet(gameObject);
+            EnergyOP.Instance.ReturnEnergy(gameObject);
         }
     }
 }
