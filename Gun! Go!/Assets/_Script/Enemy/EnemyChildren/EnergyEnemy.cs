@@ -37,7 +37,7 @@ internal class EnergyEnemy : Enemy, IEnemy {
         }
     }
 
-    protected override void Die() {
+    internal override void Die() {
         GameObject energy = EnergyOP.Instance.GetEnergy();
         energy.transform.position = gameObject.transform.position;
 

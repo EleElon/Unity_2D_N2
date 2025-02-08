@@ -8,8 +8,14 @@ internal class ExplosionCollison : MonoBehaviour {
     int dmg = 20;
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.CompareTag("Player")) {
+        Enemy enemy = other.GetComponent<Enemy>();
+
+        if (other.CompareTag("Player")) {
             PlayerController.Instance.TakeDMG(dmg);
+        }
+
+        if (other.CompareTag("Enemy")) {
+            enemy.TakeDMG(dmg);
         }
     }
 }

@@ -338,8 +338,8 @@ GameObject:
   - component: {fileID: 7329530931632735941}
   - component: {fileID: 1146935249828992015}
   - component: {fileID: 3084394099568591013}
-  - component: {fileID: 2770842235484955832}
   - component: {fileID: 7165980414636803099}
+  - component: {fileID: 442186587756408136}
   - component: {fileID: 6860534597652521892}
   m_Layer: 0
   m_Name: ExplosionEnemyModel
@@ -491,18 +491,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.79128504, y: 1.2047931}
   m_EdgeRadius: 0
---- !u!114 &2770842235484955832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3248455789732397781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf2a9e3c39d74904a86bae5b77296667, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7165980414636803099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,6 +501,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a0adfb96f4963941b7bde664bb630f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &442186587756408136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3248455789732397781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892bf869eaf6b5040b4620998c1f0ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!95 &6860534597652521892

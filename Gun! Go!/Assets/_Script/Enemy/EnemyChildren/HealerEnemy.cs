@@ -39,7 +39,7 @@ internal class HealerEnemy : Enemy, IEnemy {
         }
     }
 
-    protected override void Die() {
+    internal override void Die() {
         base.Die();
 
         PlayerController.Instance.Heal(healValue);

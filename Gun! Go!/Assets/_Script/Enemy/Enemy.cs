@@ -32,7 +32,7 @@ internal abstract class Enemy : MonoBehaviour {
         return moveSpeed;
     }
 
-    protected virtual void Die() {
+    internal virtual void Die() {
         Destroy(gameObject);
     }
 

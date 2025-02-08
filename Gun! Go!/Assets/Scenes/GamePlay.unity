@@ -9398,7 +9398,7 @@ Transform:
   m_GameObject: {fileID: 625803780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3231454, y: -0.5139834, z: 0.22763513}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10167,8 +10167,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360328782}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.3231454, y: 0.5139834, z: -0.22763513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13090,15 +13090,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 670955603782276092, guid: a485672f526fe8042bed595d9a003e89, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3269047852158343640, guid: a485672f526fe8042bed595d9a003e89, type: 3}
       propertyPath: m_Name
       value: EnergyEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3269047852158343640, guid: a485672f526fe8042bed595d9a003e89, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4107833398956690937, guid: a485672f526fe8042bed595d9a003e89, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4560251789909054763, guid: a485672f526fe8042bed595d9a003e89, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13167,11 +13171,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1837985452490338789, guid: ebc22eff7d204f8478e098c59312466d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6298977400851276928, guid: ebc22eff7d204f8478e098c59312466d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7154657226521759520, guid: ebc22eff7d204f8478e098c59312466d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13215,7 +13219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7514655290032660655, guid: ebc22eff7d204f8478e098c59312466d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13286,10 +13290,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 9181343997552530224, guid: cd7de2e9d86c15a4284d7113630c3bb4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13305,11 +13305,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 48977255403051102, guid: cd48ac58094218f448ddad7b98c5ce1b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 555277323799358264, guid: cd48ac58094218f448ddad7b98c5ce1b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1875507071897385761, guid: cd48ac58094218f448ddad7b98c5ce1b, type: 3}
       propertyPath: m_Camera
@@ -13361,7 +13361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6612901871101332471, guid: cd48ac58094218f448ddad7b98c5ce1b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -38,7 +38,7 @@ internal class ExplosionEnemy : Enemy, IEnemy {
         }
     }
 
-    protected override void Die() {
+    internal override void Die() {
         GameObject explosion = ExplosionOP.Instance.GetExplosion();
         explosion.transform.position = gameObject.transform.position;
 
