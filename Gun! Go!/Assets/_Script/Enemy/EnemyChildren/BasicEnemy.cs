@@ -7,6 +7,7 @@ internal class BasicEnemy : Enemy, IEnemy {
     [Header("---------- Variables ----------")]
     protected override float moveSpeed { get; } = 0.7f;
     // protected float moveSpeedOfBasicEnemy = 0.2f;
+    protected override int damageDeal { get; } = 8;
     protected int maxHP = 30;
     protected int currentHP;
 
@@ -44,5 +45,9 @@ internal class BasicEnemy : Enemy, IEnemy {
 
     protected override float GetMoveSpeed() {
         return moveSpeed;
+    }
+
+    internal override int GetDamageDeal() {
+        return damageDeal;
     }
 }

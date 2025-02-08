@@ -6,7 +6,8 @@ internal class ExplosionEnemy : Enemy, IEnemy {
 
     [Header("---------- Variables ----------")]
     // protected float moveSpeedOfBasicEnemy = 0.2f;
-    protected override float moveSpeed { get; } = 1f;
+    protected override float moveSpeed { get; } = 2.3f;
+    protected override int damageDeal { get; } = 0;
     protected int maxHP = 15;
     protected int currentHP;
 

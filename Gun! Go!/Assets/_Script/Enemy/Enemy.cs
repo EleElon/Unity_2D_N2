@@ -5,8 +5,9 @@ using UnityEngine;
 internal abstract class Enemy : MonoBehaviour {
 
     [Header("---------- Variables ----------")]
-    protected virtual float moveSpeed { get; } = 2f;
+    protected virtual float moveSpeed { get; } = 2;
     // protected float moveSpeed = 3f;
+    protected virtual int damageDeal { get; } = 10;
 
     protected virtual void Start() {
 
@@ -30,6 +31,10 @@ internal abstract class Enemy : MonoBehaviour {
 
     protected virtual float GetMoveSpeed() {
         return moveSpeed;
+    }
+
+    internal virtual int GetDamageDeal() {
+        return damageDeal;
     }
 
     internal virtual void Die() {

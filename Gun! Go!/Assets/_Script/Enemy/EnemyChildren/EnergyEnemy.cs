@@ -5,7 +5,7 @@ using UnityEngine;
 internal class EnergyEnemy : Enemy, IEnemy {
 
     [Header("---------- Variables ----------")]
-    // protected float moveSpeedOfBasicEnemy = 0.2f;
+    protected override int damageDeal { get; } = 13;
     protected int maxHP = 12;
     protected int currentHP;
 
@@ -50,5 +50,9 @@ internal class EnergyEnemy : Enemy, IEnemy {
 
     protected override float GetMoveSpeed() {
         return moveSpeed;
+    }
+
+    internal override int GetDamageDeal() {
+        return damageDeal;
     }
 }

@@ -6,7 +6,8 @@ internal class HealerEnemy : Enemy, IEnemy {
 
     [Header("---------- Variables ----------")]
     // protected float moveSpeedOfBasicEnemy = 0.2f;
-    protected override float moveSpeed { get; } = 1f;
+    protected override float moveSpeed { get; } = 3;
+    protected override int damageDeal { get; } = 4;
     protected int maxHP = 12;
     protected int currentHP;
     int healValue = 10;
@@ -51,5 +52,9 @@ internal class HealerEnemy : Enemy, IEnemy {
 
     protected override float GetMoveSpeed() {
         return moveSpeed;
+    }
+
+    internal override int GetDamageDeal() {
+        return damageDeal;
     }
 }
