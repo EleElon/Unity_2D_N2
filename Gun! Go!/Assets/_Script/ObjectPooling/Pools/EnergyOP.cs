@@ -5,7 +5,7 @@ internal class EnergyOP : ObjectPool<GameObject> {
 
     internal static EnergyOP Instance { get; private set; }
 
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject energyPrefabs;
 
     // PlayerBulletOP(int poolSize) : base(poolSize) { }
 
@@ -31,7 +31,7 @@ internal class EnergyOP : ObjectPool<GameObject> {
     }
 
     protected override GameObject CreateNewObject() {
-        return GameObject.Instantiate(bulletPrefab, transform);
+        return GameObject.Instantiate(energyPrefabs, transform);
     }
 
     protected override void RestoreObject(GameObject obj) {

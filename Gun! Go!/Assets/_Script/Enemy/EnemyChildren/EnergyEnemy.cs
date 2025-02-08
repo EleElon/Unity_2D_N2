@@ -40,10 +40,10 @@ internal class EnergyEnemy : Enemy, IEnemy {
 
     protected override void Die() {
         // if (energyObject != null) {
-            // GameObject energy = Instantiate(energyObject, transform.position, Quaternion.identity);
-            // Destroy(energy, 10f);
-            GameObject energy = EnergyOP.Instance.GetEnergy();
-            energy.transform.position = gameObject.transform.position;
+        // GameObject energy = Instantiate(energyObject, transform.position, Quaternion.identity);
+        // Destroy(energy, 10f);
+        GameObject energy = EnergyOP.Instance.GetEnergy();
+        energy.transform.position = gameObject.transform.position;
         // }
         base.Die();
     }

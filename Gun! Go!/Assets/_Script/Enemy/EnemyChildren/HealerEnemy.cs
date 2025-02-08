@@ -16,7 +16,6 @@ internal class HealerEnemy : Enemy, IEnemy {
 
     [Header("---------- Components ----------")]
     EnemyHPManager _enemyHPManager;
-    [SerializeField] GameObject energyObject;
 
     private void Awake() {
         currentHP = maxHP;

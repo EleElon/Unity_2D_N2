@@ -5,7 +5,7 @@ internal class PlayerBulletOP : ObjectPool<GameObject> {
 
     internal static PlayerBulletOP Instance { get; private set; }
 
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject bulletPrefabs;
 
     // PlayerBulletOP(int poolSize) : base(poolSize) { }
 
@@ -31,7 +31,7 @@ internal class PlayerBulletOP : ObjectPool<GameObject> {
     }
 
     protected override GameObject CreateNewObject() {
-        return GameObject.Instantiate(bulletPrefab, transform);
+        return GameObject.Instantiate(bulletPrefabs, transform);
     }
 
     protected override void RestoreObject(GameObject obj) {
