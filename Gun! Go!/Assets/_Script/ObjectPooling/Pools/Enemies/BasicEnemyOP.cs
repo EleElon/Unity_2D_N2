@@ -1,38 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-internal class EnergyOP : ObjectPool<GameObject> {
+internal class BasicEnemyOP : ObjectPool<GameObject> {
 
-    internal static EnergyOP Instance { get; private set; }
+    internal static BasicEnemyOP Instance { get; private set; }
 
-    [SerializeField] private GameObject energyPrefabs;
+    [SerializeField] private GameObject basicEnemyPrefabs;
 
     // PlayerBulletOP(int poolSize) : base(poolSize) { }
+    GameObject enemy;
 
     private void Awake() {
         Instance = this;
-        InitializePool(10);
+        InitializePool(5);
 
         for (int i = 0; i < poolSize; i++) {
-            GameObject obj = CreateNewObject();
-            ReturnEnergy(obj);
+            enemy = CreateNewObject();
+            ReturnBasicEnemy(enemy);
         }
     }
 
-    internal GameObject GetEnergy() {
+    internal GameObject GetBasicEnemy(Vector2 position) {
         // GameObject bullet = GetObject();
         // BorrowObject(bullet);
+
+        enemy.transform.position = position;
         return GetObject();
     }
 
-    internal void ReturnEnergy(GameObject bullet) {
+    internal void ReturnBasicEnemy(GameObject obj) {
         // RestoreObject(bullet);
-        ReturnObject(bullet);
+        ReturnObject(obj);
+        Debug.Log("vcl");
     }
 
     protected override GameObject CreateNewObject() {
-        return GameObject.Instantiate(energyPrefabs, transform);
+        return GameObject.Instantiate(basicEnemyPrefabs, transform);
     }
 
     protected override void RestoreObject(GameObject obj) {

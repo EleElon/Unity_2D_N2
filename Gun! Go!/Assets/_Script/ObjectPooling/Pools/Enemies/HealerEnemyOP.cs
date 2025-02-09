@@ -1,37 +1,40 @@
 using System;
 using UnityEngine;
 
-internal class ExplosionOP : ObjectPool<GameObject> {
+internal class HealerEnemyOP : ObjectPool<GameObject> {
 
-    internal static ExplosionOP Instance { get; private set; }
+    internal static HealerEnemyOP Instance { get; private set; }
 
-    [SerializeField] private GameObject explosionPrefabs;
+    [SerializeField] private GameObject healerEnemyPrefabs;
 
     // PlayerBulletOP(int poolSize) : base(poolSize) { }
+    GameObject enemy;
 
     private void Awake() {
         Instance = this;
-        InitializePool(7);
+        InitializePool(5);
 
         for (int i = 0; i < poolSize; i++) {
-            GameObject obj = CreateNewObject();
-            ReturnExplosion(obj);
+            enemy = CreateNewObject();
+            ReturnHealerEnemy(enemy);
         }
     }
 
-    internal GameObject GetExplosion() {
+    internal GameObject GetHealerEnemy(Vector2 position) {
         // GameObject bullet = GetObject();
         // BorrowObject(bullet);
+
+        enemy.transform.position = position;
         return GetObject();
     }
 
-    internal void ReturnExplosion(GameObject bullet) {
+    internal void ReturnHealerEnemy(GameObject obj) {
         // RestoreObject(bullet);
-        ReturnObject(bullet);
+        ReturnObject(obj);
     }
 
     protected override GameObject CreateNewObject() {
-        return GameObject.Instantiate(explosionPrefabs, transform);
+        return GameObject.Instantiate(healerEnemyPrefabs, transform);
     }
 
     protected override void RestoreObject(GameObject obj) {

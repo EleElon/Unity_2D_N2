@@ -50,4 +50,9 @@ internal class BasicEnemy : Enemy, IEnemy {
     internal override int GetDamageDeal() {
         return damageDeal;
     }
+
+    internal override void Die() {
+        Debug.Log("dcm");
+        BasicEnemyOP.Instance.ReturnBasicEnemy(this.gameObject);
+    }
 }

@@ -37,9 +37,11 @@ internal abstract class Enemy : MonoBehaviour {
         return damageDeal;
     }
 
-    internal virtual void Die() {
-        Destroy(gameObject);
-    }
+    // internal virtual void Die() {
+    //     Destroy(gameObject);
+    // }
+
+    internal abstract void Die();
 
     internal abstract void TakeDMG(int dmg);
 }

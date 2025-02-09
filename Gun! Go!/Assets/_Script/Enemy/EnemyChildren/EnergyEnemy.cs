@@ -43,7 +43,7 @@ internal class EnergyEnemy : Enemy, IEnemy {
         GameObject energy = EnergyOP.Instance.GetEnergy();
         energy.transform.position = gameObject.transform.position;
 
-        base.Die();
+        EnergyEnemyOP.Instance.ReturnEnergyEnemy(this.gameObject);
     }
 
     internal override void TakeDMG(int dmg) {

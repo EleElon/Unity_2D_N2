@@ -41,7 +41,7 @@ internal class HealerEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
-        base.Die();
+        HealerEnemyOP.Instance.ReturnHealerEnemy(this.gameObject);
 
         PlayerController.Instance.Heal(healValue);
     }
