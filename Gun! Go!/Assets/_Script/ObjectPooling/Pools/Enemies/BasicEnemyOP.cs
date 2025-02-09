@@ -8,14 +8,13 @@ internal class BasicEnemyOP : ObjectPool<GameObject> {
     [SerializeField] private GameObject basicEnemyPrefabs;
 
     // PlayerBulletOP(int poolSize) : base(poolSize) { }
-    GameObject enemy;
 
     private void Awake() {
         Instance = this;
         InitializePool(5);
 
         for (int i = 0; i < poolSize; i++) {
-            enemy = CreateNewObject();
+            GameObject enemy = CreateNewObject();
             ReturnBasicEnemy(enemy);
         }
     }

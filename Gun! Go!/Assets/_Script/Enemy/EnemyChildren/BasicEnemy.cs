@@ -51,7 +51,9 @@ internal class BasicEnemy : Enemy, IEnemy {
         return damageDeal;
     }
 
+    //FIXME: this object can't return pool to reusing
+
     internal override void Die() {
-        BasicEnemyOP.Instance.ReturnBasicEnemy(this.gameObject);
+        BasicEnemyOP.Instance.ReturnBasicEnemy(gameObject);
     }
 }
