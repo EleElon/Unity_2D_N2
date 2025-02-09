@@ -20,18 +20,17 @@ internal class BasicEnemyOP : ObjectPool<GameObject> {
         }
     }
 
-    internal GameObject GetBasicEnemy(Vector2 position) {
+    internal GameObject GetBasicEnemy() {
         // GameObject bullet = GetObject();
         // BorrowObject(bullet);
 
-        enemy.transform.position = position;
+        // enemy.transform.position = pos;
         return GetObject();
     }
 
     internal void ReturnBasicEnemy(GameObject obj) {
         // RestoreObject(bullet);
         ReturnObject(obj);
-        Debug.Log("vcl");
     }
 
     protected override GameObject CreateNewObject() {

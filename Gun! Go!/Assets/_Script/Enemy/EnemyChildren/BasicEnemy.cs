@@ -52,7 +52,6 @@ internal class BasicEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
-        Debug.Log("dcm");
         BasicEnemyOP.Instance.ReturnBasicEnemy(this.gameObject);
     }
 }

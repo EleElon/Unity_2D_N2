@@ -9,7 +9,6 @@ internal class ExplosionCollison : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         Enemy enemy = other.GetComponent<Enemy>();
-        // ExplosionEnemy _enemy = other.GetComponentInParent<ExplosionEnemy>();
 
         if (other.CompareTag("Player")) {
             PlayerController.Instance.TakeDMG(baseDamageExplosion);

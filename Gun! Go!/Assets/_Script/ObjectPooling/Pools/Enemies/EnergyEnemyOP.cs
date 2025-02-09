@@ -20,11 +20,10 @@ internal class EnergyEnemyOP : ObjectPool<GameObject> {
         }
     }
 
-    internal GameObject GetEnergyEnemy(Vector2 position) {
+    internal GameObject GetEnergyEnemy() {
         // GameObject bullet = GetObject();
         // BorrowObject(bullet);
 
-        enemy.transform.position = position;
         return GetObject();
     }
 

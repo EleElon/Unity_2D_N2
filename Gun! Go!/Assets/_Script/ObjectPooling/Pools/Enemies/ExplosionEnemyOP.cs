@@ -20,11 +20,10 @@ internal class ExplosionEnemyOP : ObjectPool<GameObject> {
         }
     }
 
-    internal GameObject GetExplosionEnemy(Vector2 position) {
+    internal GameObject GetExplosionEnemy() {
         // GameObject bullet = GetObject();
         // BorrowObject(bullet);
 
-        enemy.transform.position = position;
         return GetObject();
     }
 

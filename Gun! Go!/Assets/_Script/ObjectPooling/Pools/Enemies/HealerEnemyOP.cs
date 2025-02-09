@@ -20,11 +20,10 @@ internal class HealerEnemyOP : ObjectPool<GameObject> {
         }
     }
 
-    internal GameObject GetHealerEnemy(Vector2 position) {
+    internal GameObject GetHealerEnemy() {
         // GameObject bullet = GetObject();
         // BorrowObject(bullet);
 
-        enemy.transform.position = position;
         return GetObject();
     }
 
