@@ -10,6 +10,7 @@ internal class GunController : MonoBehaviour {
     [Header("---------- Variables ----------")]
     float rotateOffset = 180f;
     int maxBullets = 20;
+    int bulletDamage = 10;
     int bulletsRemaining;
     float shootDelay = 0.15f;
     float nextShoot;
@@ -79,6 +80,12 @@ internal class GunController : MonoBehaviour {
         GameObject bullet = PlayerBulletOP.Instance.GetBullet();
         bullet.transform.rotation = shootingPoint.rotation;
         bullet.transform.position = shootingPoint.position;
+
+        BulletCollision _bulletCollision = bullet.GetComponent<BulletCollision>();
+        if (_bulletCollision != null) {
+            _bulletCollision.SetBulletDamage(bulletDamage);
+        }
+
         bulletsRemaining--;
     }
 
