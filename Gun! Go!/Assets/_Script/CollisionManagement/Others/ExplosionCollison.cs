@@ -5,17 +5,18 @@ using UnityEngine;
 internal class ExplosionCollison : MonoBehaviour {
 
     [Header("---------- Variables ----------")]
-    int dmg = 20;
+    int baseDamageExplosion = 20;
 
     private void OnTriggerEnter2D(Collider2D other) {
         Enemy enemy = other.GetComponent<Enemy>();
+        // ExplosionEnemy _enemy = other.GetComponentInParent<ExplosionEnemy>();
 
         if (other.CompareTag("Player")) {
-            PlayerController.Instance.TakeDMG(dmg);
+            PlayerController.Instance.TakeDMG(baseDamageExplosion);
         }
 
         if (other.CompareTag("Enemy")) {
-            enemy.TakeDMG(dmg);
+            enemy.TakeDMG(baseDamageExplosion);
         }
     }
 }

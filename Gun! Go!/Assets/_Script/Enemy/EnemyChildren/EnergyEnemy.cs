@@ -5,7 +5,9 @@ using UnityEngine;
 internal class EnergyEnemy : Enemy, IEnemy {
 
     [Header("---------- Variables ----------")]
-    protected override int damageDeal { get; } = 13;
+    protected override int damageDeal { get; } = 4;
+    int hit = 3;
+    float delayHit = 0.2f;
     protected int maxHP = 12;
     protected int currentHP;
 
@@ -54,5 +56,13 @@ internal class EnergyEnemy : Enemy, IEnemy {
 
     internal override int GetDamageDeal() {
         return damageDeal;
+    }
+
+    internal int GetHit() {
+        return hit;
+    }
+
+    internal float GetDelayHit() {
+        return delayHit;
     }
 }

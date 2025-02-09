@@ -268,8 +268,8 @@ GameObject:
   - component: {fileID: 1060125853315320892}
   - component: {fileID: 3813019786154629587}
   - component: {fileID: 3410608036663144586}
-  - component: {fileID: 965622603768255002}
   - component: {fileID: 6062596157368710011}
+  - component: {fileID: 4769549240628112143}
   m_Layer: 0
   m_Name: EnergyEnemyModel
   m_TagString: Enemy
@@ -442,18 +442,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.79128504, y: 1.2047931}
   m_EdgeRadius: 0
---- !u!114 &965622603768255002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3867622336668625266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf2a9e3c39d74904a86bae5b77296667, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6062596157368710011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,6 +452,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b129c9243b717b342aa3b59d533d95cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4769549240628112143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3867622336668625266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f7ce1eb93ff6e489bcdcffe2fb5792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4658311254802521610

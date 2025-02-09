@@ -8,6 +8,7 @@ internal class ExplosionEnemy : Enemy, IEnemy {
     // protected float moveSpeedOfBasicEnemy = 0.2f;
     protected override float moveSpeed { get; } = 2.3f;
     protected override int damageDeal { get; } = 0;
+    int explosionDMG = 20;
     protected int maxHP = 15;
     protected int currentHP;
 
@@ -52,5 +53,9 @@ internal class ExplosionEnemy : Enemy, IEnemy {
 
     protected override float GetMoveSpeed() {
         return moveSpeed;
+    }
+
+    internal int GetExplosionDMG() {
+        return explosionDMG;
     }
 }
