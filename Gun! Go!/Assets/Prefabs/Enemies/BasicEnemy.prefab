@@ -289,6 +289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afee3452129dafa489ca6187ac093c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHPImage: {fileID: 6773416454779366660}
+  easeHPImage: {fileID: 0}
   currentHPSlider: {fileID: 8056213299036135527}
   easeHPSlider: {fileID: 5469089642302057622}
 --- !u!1 &2523705616475888419
@@ -498,6 +500,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -557,7 +560,7 @@ Animator:
   m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &642641969503076209
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -568,8 +571,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 internal class EnemyHPManager : MonoBehaviour {
 
     [Header("---------- Elements ----------")]
+    [SerializeField] Image currentHPImage;
+    [SerializeField] Image easeHPImage;
     [SerializeField] Slider currentHPSlider;
     [SerializeField] Slider easeHPSlider;
 
@@ -24,6 +26,8 @@ internal class EnemyHPManager : MonoBehaviour {
         currentHPSlider.value = _enemy.GetEnemiesMaxHP();
         easeHPSlider.maxValue = _enemy.GetEnemiesMaxHP();
         easeHPSlider.value = _enemy.GetEnemiesMaxHP();
+
+        UpdateHPBarUI();
     }
 
     private void FixedUpdate() {
@@ -36,7 +40,28 @@ internal class EnemyHPManager : MonoBehaviour {
                 easeHPSlider.value = Mathf.Lerp(easeHPSlider.value, _enemy.GetEnemiesCurrentHP(), easeLerpSpeed);
             }
         }
+        UpdateHPBarUI();
     }
+
+    void UpdateHPBarUI() {
+        float HPPercent = (float)_enemy.GetEnemiesCurrentHP() / (float)_enemy.GetEnemiesMaxHP();
+        Color targetColor;
+
+        if (HPPercent > 0.5f) {
+            targetColor = new Color32(14, 255, 0, 255);
+        }
+        else if (HPPercent > 0.25f) {
+            targetColor = new Color32(255, 136, 0, 255);
+        }
+        else {
+            targetColor = new Color32(255, 0, 0, 255);
+        }
+
+        if (currentHPImage.color != targetColor) {
+            currentHPImage.color = Color.Lerp(currentHPImage.color, targetColor, Time.deltaTime * 5f);
+        }
+    }
+
 
     internal void SetLastDMGTakeDMG(float time) {
         lastDMGTakeTime = time;

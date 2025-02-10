@@ -14,16 +14,14 @@ internal class BasicEnemyOP : ObjectPool<GameObject> {
         InitializePool(5);
 
         for (int i = 0; i < poolSize; i++) {
-            GameObject enemy = CreateNewObject();
-            ReturnBasicEnemy(enemy);
+            GameObject obj = CreateNewObject();
+            ReturnBasicEnemy(obj);
         }
     }
 
     internal GameObject GetBasicEnemy() {
         // GameObject bullet = GetObject();
         // BorrowObject(bullet);
-
-        // enemy.transform.position = pos;
         return GetObject();
     }
 

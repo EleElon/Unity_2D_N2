@@ -9,7 +9,7 @@ internal class BloodManager : MonoBehaviour {
     }
 
     IEnumerator TimeToDestroy() {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.3f);
 
         if (gameObject.activeSelf) {
             BloodOP.Instance.ReturnBlood(gameObject);
