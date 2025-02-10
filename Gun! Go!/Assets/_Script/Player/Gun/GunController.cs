@@ -10,8 +10,8 @@ internal class GunController : MonoBehaviour {
     [Header("---------- Variables ----------")]
     float rotateOffset = 180f;
     int maxBullets = 20;
-    int bulletDamage = 10;
     int bulletsRemaining;
+    int bulletDamage = 10;
     float shootDelay = 0.15f;
     float nextShoot;
     bool reloading;

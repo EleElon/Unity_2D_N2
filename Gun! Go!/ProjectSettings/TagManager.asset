@@ -63,6 +63,9 @@ TagManager:
   - name: Bullet
     uniqueID: 2287053619
     locked: 0
+  - name: Blood
+    uniqueID: 586684225
+    locked: 0
   - name: Gun
     uniqueID: 2133776685
     locked: 0
