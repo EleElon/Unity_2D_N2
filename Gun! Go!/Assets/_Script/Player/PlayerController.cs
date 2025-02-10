@@ -9,7 +9,7 @@ internal class PlayerController : MonoBehaviour {
     [Header("---------- Variables ----------")]
     Vector2 moveSpeed = Vector2.zero;
     float maxSpeed = 9f, giaToc = 5f, giaTocGiam = 15f;
-    int maxHP = 100, currentHP;
+    int maxHP = 100, currentHP, checkHP;
     int maxEnergy = 50, currentEnergy;
     bool ismoving;
 
@@ -25,12 +25,13 @@ internal class PlayerController : MonoBehaviour {
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
-        currentHP = maxHP;
+        checkHP = currentHP = maxHP;
     }
 
     private void Update() {
         HandleMovement();
         UpdateAnimation();
+        UpdatePlayerBloodAnimation();
 
         if (currentHP <= 0) {
             Die();
@@ -81,6 +82,14 @@ internal class PlayerController : MonoBehaviour {
         else {
             moveSpeed = Vector2.MoveTowards(moveSpeed, Vector2.zero, giaTocGiam * Time.deltaTime);
             ismoving = false;
+        }
+    }
+
+    void UpdatePlayerBloodAnimation() {
+        if (currentHP != checkHP) {
+            GameObject bloods = BloodOP.Instance.GetBlood();
+            bloods.transform.position = gameObject.transform.position;
+            checkHP = currentHP;
         }
     }
 

@@ -31,19 +31,19 @@ internal class EnemySpawnManager : MonoBehaviour {
 
             int randomCase = Random.Range(0, 4);
 
-            switch (0) {
+            switch (randomCase) {
                 case 0:
                     enemy = BasicEnemyOP.Instance?.GetBasicEnemy();
                     break;
-                // case 1:
-                //     enemy = EnergyEnemyOP.Instance?.GetEnergyEnemy();
-                //     break;
-                // case 2:
-                //     enemy = HealerEnemyOP.Instance?.GetHealerEnemy();
-                //     break;
-                // case 3:
-                //     enemy = ExplosionEnemyOP.Instance?.GetExplosionEnemy();
-                //     break;
+                case 1:
+                    enemy = EnergyEnemyOP.Instance?.GetEnergyEnemy();
+                    break;
+                case 2:
+                    enemy = HealerEnemyOP.Instance?.GetHealerEnemy();
+                    break;
+                case 3:
+                    enemy = ExplosionEnemyOP.Instance?.GetExplosionEnemy();
+                    break;
             }
             if (enemy == null)
                 continue;

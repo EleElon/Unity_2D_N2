@@ -8,7 +8,7 @@ internal class EnemyCollision : MonoBehaviour {
     protected bool isCollision;
 
     [Header("---------- Components ----------")]
-    Enemy _enemy;
+    protected Enemy _enemy;
 
     protected virtual void Awake() {
         _enemy = GetComponent<Enemy>();
@@ -19,8 +19,11 @@ internal class EnemyCollision : MonoBehaviour {
             isCollision = true;
             InvokeRepeating("DealDamage", 0, 1.5f);
         }
+        IfCollisionWithBullet(other);
+    }
 
-        if (other.CompareTag("Bullet")) {
+    protected void IfCollisionWithBullet(Collider2D col) {
+        if (col.CompareTag("Bullet")) {
             GameObject bloods = BloodOP.Instance.GetBlood();
             bloods.transform.position = gameObject.transform.position;
         }

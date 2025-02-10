@@ -8,10 +8,10 @@ internal class EnergyEnemyCollision : EnemyCollision {
     Coroutine attackCoroutine;
 
     [Header("---------- Components ----------")]
-    EnergyEnemy _enemy;
+    EnergyEnemy _energyEnemy;
 
     protected override void Awake() {
-        _enemy = GetComponent<EnergyEnemy>();
+        _energyEnemy = GetComponent<EnergyEnemy>();
     }
 
     protected override void OnTriggerEnter2D(Collider2D other) {
@@ -21,6 +21,7 @@ internal class EnergyEnemyCollision : EnemyCollision {
 
             attackCoroutine = StartCoroutine(DealDamageAfterCalculate());
         }
+        IfCollisionWithBullet(other);
     }
 
     protected override void OnTriggerExit2D(Collider2D other) {
@@ -43,12 +44,12 @@ internal class EnergyEnemyCollision : EnemyCollision {
     }
 
     IEnumerator CalculateHit() {
-        for (int i = 0; i < _enemy.GetHit(); i++) {
+        for (int i = 0; i < _energyEnemy.GetHit(); i++) {
             if (!isCollision) yield break;
 
-            PlayerController.Instance.TakeDMG(_enemy.GetDamageDeal());
+            PlayerController.Instance.TakeDMG(_energyEnemy.GetDamageDeal());
 
-            yield return new WaitForSeconds(_enemy.GetDelayHit());
+            yield return new WaitForSeconds(_energyEnemy.GetDelayHit());
         }
     }
 }
