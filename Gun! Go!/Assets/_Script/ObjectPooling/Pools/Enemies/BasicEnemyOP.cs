@@ -8,6 +8,10 @@ internal class BasicEnemyOP : ObjectPool<GameObject> {
     [SerializeField] private GameObject basicEnemyPrefabs;
 
     // PlayerBulletOP(int poolSize) : base(poolSize) { }
+    // [Header("---------- Variables ----------")]
+    // string childName = "BasicEnemyModel";
+    // GameObject basicEnemyChild;
+    // Transform parentTransform;
 
     private void Awake() {
         Instance = this;
@@ -31,11 +35,16 @@ internal class BasicEnemyOP : ObjectPool<GameObject> {
     }
 
     protected override GameObject CreateNewObject() {
-        return GameObject.Instantiate(basicEnemyPrefabs, transform);
+        // GameObject prefabInstance = Instantiate(basicEnemyPrefabs, transform);
+        // basicEnemyChild = prefabInstance.transform.Find(childName)?.gameObject;
+        // return basicEnemyChild;
+        return Instantiate(basicEnemyPrefabs, transform);
     }
 
     protected override void RestoreObject(GameObject obj) {
+        // parentTransform = obj.transform.parent;
         obj.SetActive(false);
+        // obj.transform.SetParent(transform);
     }
 
     protected override void BorrowObject(GameObject obj) {

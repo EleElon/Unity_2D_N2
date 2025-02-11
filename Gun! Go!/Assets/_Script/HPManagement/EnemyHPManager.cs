@@ -62,6 +62,10 @@ internal class EnemyHPManager : MonoBehaviour {
         }
     }
 
+    internal void ResetEnemyHPBarState() {
+        currentHPSlider.value = _enemy.GetEnemiesMaxHP();
+        easeHPSlider.value = _enemy.GetEnemiesMaxHP();
+    }
 
     internal void SetLastDMGTakeDMG(float time) {
         lastDMGTakeTime = time;

@@ -9,8 +9,9 @@ internal abstract class Enemy : MonoBehaviour {
     // protected float moveSpeed = 3f;
     protected virtual int damageDeal { get; } = 10;
 
-    protected virtual void Start() {
-
+    private void OnEnable() {
+        ResetEnemyState();
+        // _enemyHPManager.ResetEnemyHPBarState();
     }
 
     protected virtual void Update() {
@@ -44,4 +45,10 @@ internal abstract class Enemy : MonoBehaviour {
     internal abstract void Die();
 
     internal abstract void TakeDMG(int dmg);
+
+    protected abstract void ResetEnemyState();
+
+    protected abstract void ResetGameObjectPosition();
+
+    protected abstract void ResetParentGameObjectPosition();
 }

@@ -43,7 +43,7 @@ internal class EnergyEnemy : Enemy, IEnemy {
         GameObject energy = EnergyOP.Instance.GetEnergy();
         energy.transform.position = gameObject.transform.position;
 
-        EnergyEnemyOP.Instance.ReturnEnergyEnemy(this.gameObject);
+        EnergyEnemyOP.Instance.ReturnEnergyEnemy(transform.parent.gameObject);
     }
 
     internal override void TakeDMG(int dmg) {
@@ -56,6 +56,22 @@ internal class EnergyEnemy : Enemy, IEnemy {
 
     internal override int GetDamageDeal() {
         return damageDeal;
+    }
+
+    protected override void ResetEnemyState() {
+        currentHP = maxHP;
+        ResetParentGameObjectPosition();
+        ResetGameObjectPosition();
+    }
+
+    protected override void ResetGameObjectPosition() {
+        transform.position = Vector2.zero;
+    }
+
+    protected override void ResetParentGameObjectPosition() {
+        if (transform.parent != null) {
+            transform.parent.position = Vector2.zero;
+        }
     }
 
     internal int GetHit() {

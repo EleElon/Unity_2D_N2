@@ -41,13 +41,29 @@ internal class HealerEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
-        HealerEnemyOP.Instance.ReturnHealerEnemy(this.gameObject);
+        HealerEnemyOP.Instance.ReturnHealerEnemy(transform.parent.gameObject);
 
         PlayerController.Instance.Heal(healValue);
     }
 
     internal override void TakeDMG(int dmg) {
         currentHP -= dmg;
+    }
+
+    protected override void ResetEnemyState() {
+        currentHP = maxHP;
+        ResetParentGameObjectPosition();
+        ResetGameObjectPosition();
+    }
+
+    protected override void ResetGameObjectPosition() {
+        transform.position = Vector2.zero;
+    }
+
+    protected override void ResetParentGameObjectPosition() {
+        if (transform.parent != null) {
+            transform.parent.position = Vector2.zero;
+        }
     }
 
     protected override float GetMoveSpeed() {

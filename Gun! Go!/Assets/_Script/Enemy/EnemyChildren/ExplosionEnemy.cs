@@ -44,11 +44,27 @@ internal class ExplosionEnemy : Enemy, IEnemy {
         GameObject explosion = ExplosionOP.Instance.GetExplosion();
         explosion.transform.position = gameObject.transform.position;
 
-        ExplosionEnemyOP.Instance.ReturnExplosionEnemy(this.gameObject);
+        ExplosionEnemyOP.Instance.ReturnExplosionEnemy(transform.parent.gameObject);
     }
 
     internal override void TakeDMG(int dmg) {
         currentHP -= dmg;
+    }
+
+    protected override void ResetEnemyState() {
+        currentHP = maxHP;
+        ResetParentGameObjectPosition();
+        ResetGameObjectPosition();
+    }
+
+    protected override void ResetGameObjectPosition() {
+        transform.position = Vector2.zero;
+    }
+
+    protected override void ResetParentGameObjectPosition() {
+        if (transform.parent != null) {
+            transform.parent.position = Vector2.zero;
+        }
     }
 
     protected override float GetMoveSpeed() {
