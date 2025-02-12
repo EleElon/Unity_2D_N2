@@ -11,7 +11,7 @@ internal class BloodOP : ObjectPool<GameObject> {
 
     private void Awake() {
         Instance = this;
-        InitializePool(10);
+        InitializePool(15);
 
         for (int i = 0; i < poolSize; i++) {
             GameObject obj = CreateNewObject();

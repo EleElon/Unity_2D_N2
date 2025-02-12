@@ -86,7 +86,7 @@ internal class PlayerController : MonoBehaviour {
     }
 
     void UpdatePlayerBloodAnimation() {
-        if (currentHP != checkHP) {
+        if (currentHP < checkHP) {
             GameObject bloods = BloodOP.Instance.GetBlood();
             bloods.transform.position = gameObject.transform.position;
             checkHP = currentHP;
@@ -105,6 +105,7 @@ internal class PlayerController : MonoBehaviour {
 
     internal void Heal(int healValue) {
         currentHP += healValue;
+        checkHP = currentHP;
     }
 
     internal void TakeEnergy(int energy) {
