@@ -30,7 +30,7 @@ internal abstract class Enemy : MonoBehaviour {
         }
     }
 
-    protected virtual float GetMoveSpeed() {
+    internal virtual float GetMoveSpeed() {
         return moveSpeed;
     }
 

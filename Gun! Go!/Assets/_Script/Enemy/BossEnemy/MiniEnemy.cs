@@ -5,9 +5,8 @@ using UnityEngine;
 internal class MiniEnemy : Enemy, IEnemy {
 
     [Header("---------- Variables ----------")]
-    // protected override float moveSpeed { get; } = 0.7f;
-    // protected float moveSpeedOfBasicEnemy = 0.2f;
-    protected override int damageDeal { get; } = 8;
+    protected new float moveSpeed { get; set; } = 0f;
+    protected override int damageDeal { get; } = 1;
     protected int maxHP = 8;
     protected int currentHP;
 
@@ -21,6 +20,8 @@ internal class MiniEnemy : Enemy, IEnemy {
         currentHP = maxHP;
 
         _enemyHPManager = GetComponentInChildren<EnemyHPManager>();
+
+        SetMiniEnemySpeed();
     }
 
     protected override void Update() {
@@ -39,12 +40,14 @@ internal class MiniEnemy : Enemy, IEnemy {
         }
     }
 
-    internal override void TakeDMG(int dmg) {
-        currentHP -= dmg;
+    void SetMiniEnemySpeed() {
+        float newSpeed = Random.Range(2f, 3.1f);
+
+        moveSpeed = newSpeed;
     }
 
-    protected override float GetMoveSpeed() {
-        return moveSpeed;
+    internal override void TakeDMG(int dmg) {
+        currentHP -= dmg;
     }
 
     internal override int GetDamageDeal() {
@@ -52,7 +55,11 @@ internal class MiniEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
-        BasicEnemyOP.Instance.ReturnBasicEnemy(transform.parent.gameObject);
+        MiniEnemyOP.Instance?.ReturnMiniEnemy(transform.parent.gameObject);
+    }
+
+    internal override float GetMoveSpeed() {
+        return moveSpeed;
     }
 
     protected override void ResetEnemyState() {

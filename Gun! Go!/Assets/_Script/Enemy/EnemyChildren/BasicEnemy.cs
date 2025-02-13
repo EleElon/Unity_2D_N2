@@ -43,7 +43,7 @@ internal class BasicEnemy : Enemy, IEnemy {
         currentHP -= dmg;
     }
 
-    protected override float GetMoveSpeed() {
+    internal override float GetMoveSpeed() {
         return moveSpeed;
     }
 

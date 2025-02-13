@@ -1,37 +1,37 @@
 using System;
 using UnityEngine;
 
-internal class BloodOP : ObjectPool<GameObject> {
+internal class USB_OP : ObjectPool<GameObject> {
 
-    internal static BloodOP Instance { get; private set; }
+    internal static USB_OP Instance { get; private set; }
 
-    [SerializeField] private GameObject bloodPrefabs;
+    [SerializeField] private GameObject usbPrefabs;
 
     // PlayerBulletOP(int poolSize) : base(poolSize) { }
 
     private void Awake() {
         Instance = this;
-        InitializePool(30);
+        InitializePool(20);
 
         for (int i = 0; i < poolSize; i++) {
             GameObject obj = CreateNewObject();
-            ReturnBlood(obj);
+            ReturnUSB(obj);
         }
     }
 
-    internal GameObject GetBlood() {
+    internal GameObject GetUSB() {
         // GameObject bullet = GetObject();
         // BorrowObject(bullet);
         return GetObject();
     }
 
-    internal void ReturnBlood(GameObject obj) {
+    internal void ReturnUSB(GameObject obj) {
         // RestoreObject(bullet);
         ReturnObject(obj);
     }
 
     protected override GameObject CreateNewObject() {
-        return GameObject.Instantiate(bloodPrefabs, transform);
+        return GameObject.Instantiate(usbPrefabs, transform);
     }
 
     protected override void RestoreObject(GameObject obj) {

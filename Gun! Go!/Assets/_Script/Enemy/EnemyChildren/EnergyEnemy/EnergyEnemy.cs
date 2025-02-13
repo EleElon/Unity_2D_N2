@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-internal class ExplosionEnemy : Enemy, IEnemy {
+internal class EnergyEnemy : Enemy, IEnemy {
 
     [Header("---------- Variables ----------")]
-    // protected float moveSpeedOfBasicEnemy = 0.2f;
-    protected override float moveSpeed { get; } = 2.3f;
-    protected override int damageDeal { get; } = 0;
-    int explosionDMG = 20;
-    protected int maxHP = 15;
+    protected override int damageDeal { get; } = 4;
+    int hit = 3;
+    float delayHit = 0.2f;
+    protected int maxHP = 12;
     protected int currentHP;
 
     public int GetEnemiesMaxHP() => maxHP;
@@ -41,14 +40,22 @@ internal class ExplosionEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
-        GameObject explosion = ExplosionOP.Instance.GetExplosion();
-        explosion.transform.position = gameObject.transform.position;
+        GameObject energy = EnergyOP.Instance.GetEnergy();
+        energy.transform.position = gameObject.transform.position;
 
-        ExplosionEnemyOP.Instance.ReturnExplosionEnemy(transform.parent.gameObject);
+        EnergyEnemyOP.Instance.ReturnEnergyEnemy(transform.parent.gameObject);
     }
 
     internal override void TakeDMG(int dmg) {
         currentHP -= dmg;
+    }
+
+    internal override float GetMoveSpeed() {
+        return moveSpeed;
+    }
+
+    internal override int GetDamageDeal() {
+        return damageDeal;
     }
 
     protected override void ResetEnemyState() {
@@ -67,11 +74,11 @@ internal class ExplosionEnemy : Enemy, IEnemy {
         }
     }
 
-    protected override float GetMoveSpeed() {
-        return moveSpeed;
+    internal int GetHit() {
+        return hit;
     }
 
-    internal int GetExplosionDMG() {
-        return explosionDMG;
+    internal float GetDelayHit() {
+        return delayHit;
     }
 }

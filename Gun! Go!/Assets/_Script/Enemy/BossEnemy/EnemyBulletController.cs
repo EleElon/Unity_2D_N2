@@ -1,14 +1,13 @@
+using System.Collections;
 using UnityEngine;
 
 internal class EnemyBulletController : MonoBehaviour {
 
-
     Vector3 moveDirection;
-    float bulletSpeed = 1.6f;
-    float bulletCircleSpeed = 0.8f;
+    float bulletSpeed = 2.3f;
 
     void OnEnable() {
-        Destroy(gameObject, 10f);
+        StartCoroutine(TimeToReturn());
     }
 
     void Update() {
@@ -24,7 +23,11 @@ internal class EnemyBulletController : MonoBehaviour {
         return bulletSpeed;
     }
 
-    internal float GetBulletCircleSpeed() {
-        return bulletCircleSpeed;
+    IEnumerator TimeToReturn() {
+        yield return new WaitForSeconds(20f);
+
+        if (gameObject.activeSelf) {
+            EnemyBulletOP.Instance.ReturnEnemyBullet(gameObject);
+        }
     }
 }

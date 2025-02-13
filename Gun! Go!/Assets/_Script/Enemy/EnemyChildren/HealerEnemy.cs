@@ -66,7 +66,7 @@ internal class HealerEnemy : Enemy, IEnemy {
         }
     }
 
-    protected override float GetMoveSpeed() {
+    internal override float GetMoveSpeed() {
         return moveSpeed;
     }
 

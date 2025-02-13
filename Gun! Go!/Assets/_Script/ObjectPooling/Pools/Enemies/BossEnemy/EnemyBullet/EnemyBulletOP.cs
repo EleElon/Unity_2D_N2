@@ -1,37 +1,37 @@
 using System;
 using UnityEngine;
 
-internal class BloodOP : ObjectPool<GameObject> {
+internal class EnemyBulletOP : ObjectPool<GameObject> {
 
-    internal static BloodOP Instance { get; private set; }
+    internal static EnemyBulletOP Instance { get; private set; }
 
-    [SerializeField] private GameObject bloodPrefabs;
+    [SerializeField] private GameObject enemyBulletPrefabs;
 
     // PlayerBulletOP(int poolSize) : base(poolSize) { }
 
     private void Awake() {
         Instance = this;
-        InitializePool(30);
+        InitializePool(100);
 
         for (int i = 0; i < poolSize; i++) {
             GameObject obj = CreateNewObject();
-            ReturnBlood(obj);
+            ReturnEnemyBullet(obj);
         }
     }
 
-    internal GameObject GetBlood() {
+    internal GameObject GetEnemyBullet() {
         // GameObject bullet = GetObject();
         // BorrowObject(bullet);
         return GetObject();
     }
 
-    internal void ReturnBlood(GameObject obj) {
+    internal void ReturnEnemyBullet(GameObject obj) {
         // RestoreObject(bullet);
         ReturnObject(obj);
     }
 
     protected override GameObject CreateNewObject() {
-        return GameObject.Instantiate(bloodPrefabs, transform);
+        return GameObject.Instantiate(enemyBulletPrefabs, transform);
     }
 
     protected override void RestoreObject(GameObject obj) {
