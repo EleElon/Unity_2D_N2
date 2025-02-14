@@ -9,6 +9,7 @@ TagManager:
   - Energy
   - Explosion
   - EnemyBullet
+  - HPBall
   layers:
   - Default
   - TransparentFX
@@ -73,7 +74,7 @@ TagManager:
   - name: Tree
     uniqueID: 3238527965
     locked: 0
-  - name: Energy
+  - name: Item
     uniqueID: 1956983437
     locked: 0
   - name: FX

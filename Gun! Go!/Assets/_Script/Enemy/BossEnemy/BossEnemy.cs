@@ -6,6 +6,7 @@ internal class BossEnemy : Enemy, IEnemy {
     [Header("---------- Variables ----------")]
     protected override float moveSpeed { get; } = 0.25f;
     protected override int damageDeal { get; } = 35;
+    int bulletDMG = 18;
     bool isMoving;
     protected int maxHP = 500;
     protected int currentHP;
@@ -61,11 +62,15 @@ internal class BossEnemy : Enemy, IEnemy {
                 }
                 else {
                     MoveToTarget();
+                    FlipEnemy();
                 }
                 break;
         }
 
-        UsingSkill();
+        if (PlayerController.Instance != null) {
+            UsingSkill();
+        }
+
         UpdateAnimation();
 
         if (currentHP <= 0) {
@@ -78,11 +83,20 @@ internal class BossEnemy : Enemy, IEnemy {
             base.FlipEnemy();
         }
         else {
-            transform.localScale = new Vector3(targetPosition.x < transform.position.x ? 1 : -1, 1, 1);
+            transform.localScale = new Vector3(targetPosition.x < transform.position.x ? -1 : 1, 1, 1);
         }
 
+        FlipHPBar();
+    }
+
+    void FlipHPBar() {
         if (PlayerController.Instance != null) {
-            _enemyHPManager.transform.localScale = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? -1 : 1, 1, 1);
+            if (currentRage >= 70) {
+                _enemyHPManager.transform.localScale = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? -1 : 1, 1, 1);
+            }
+            else {
+                _enemyHPManager.transform.localScale = new Vector3(targetPosition.x < transform.position.x ? -1 : 1, 1, 1);
+            }
         }
     }
 
@@ -99,7 +113,10 @@ internal class BossEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
-        // BasicEnemyOP.Instance.ReturnBasicEnemy(transform.parent.gameObject);
+        GameObject usb = USB_OP.Instance.GetUSB();
+        usb.transform.position = transform.position;
+
+        BossEnemyOP.Instance.ReturnBossEnemy(transform.parent.gameObject);
     }
 
     void NormalShoot() {
@@ -108,6 +125,11 @@ internal class BossEnemy : Enemy, IEnemy {
 
             GameObject bullet = EnemyBulletOP.Instance?.GetEnemyBullet();
             EnemyBulletController _enemyBulletController = bullet.GetComponent<EnemyBulletController>();
+            EnemyBulletCollision _enemyBulletCollision = bullet.GetComponent<EnemyBulletCollision>();
+
+            if (_enemyBulletController != null) {
+                _enemyBulletCollision.SetBulletDamage(bulletDMG);
+            }
 
             _enemyBulletController.setMoveDireciton(directionToPlayer * _enemyBulletController.GetBulletSpeed());
 
@@ -123,6 +145,11 @@ internal class BossEnemy : Enemy, IEnemy {
             for (int i = 0; i < bulletAmount; i++) {
                 GameObject bullet = EnemyBulletOP.Instance?.GetEnemyBullet();
                 EnemyBulletController _enemyBulletController = bullet.AddComponent<EnemyBulletController>();
+                EnemyBulletCollision _enemyBulletCollision = bullet.GetComponent<EnemyBulletCollision>();
+
+                if (_enemyBulletController != null) {
+                    _enemyBulletCollision.SetBulletDamage(bulletDMG);
+                }
 
                 _enemyBulletController.setMoveDireciton(directionToPlayer * _enemyBulletController.GetBulletSpeed());
 
@@ -142,6 +169,11 @@ internal class BossEnemy : Enemy, IEnemy {
 
             GameObject bullet = EnemyBulletOP.Instance?.GetEnemyBullet();
             EnemyBulletController _enemyBulletController = bullet.GetComponent<EnemyBulletController>();
+            EnemyBulletCollision _enemyBulletCollision = bullet.GetComponent<EnemyBulletCollision>();
+
+            if (_enemyBulletController != null) {
+                _enemyBulletCollision.SetBulletDamage(bulletDMG);
+            }
 
             _enemyBulletController.setMoveDireciton(bulletDirection * _enemyBulletController.GetBulletSpeed());
 
@@ -161,6 +193,11 @@ internal class BossEnemy : Enemy, IEnemy {
 
                 GameObject bullet = EnemyBulletOP.Instance?.GetEnemyBullet();
                 EnemyBulletController _enemyBulletController = bullet.GetComponent<EnemyBulletController>();
+                EnemyBulletCollision _enemyBulletCollision = bullet.GetComponent<EnemyBulletCollision>();
+
+                if (_enemyBulletController != null) {
+                    _enemyBulletCollision.SetBulletDamage(bulletDMG);
+                }
 
                 _enemyBulletController.setMoveDireciton(bulletDirection * _enemyBulletController.GetBulletSpeed());
 
@@ -171,7 +208,7 @@ internal class BossEnemy : Enemy, IEnemy {
     }
 
     void Summon() {
-        int summonCount = Random.Range(0, 6);
+        int summonCount = Random.Range(1, 6);
 
         for (int i = 0; i < summonCount; i++) {
             GameObject miniEnemy = MiniEnemyOP.Instance.GetMiniEnemy();
@@ -209,7 +246,7 @@ internal class BossEnemy : Enemy, IEnemy {
         }
     }
 
-    void SummonWithFullRage2() {
+    void SummonWithFullRage1() {
         const int miniEnemyCount = 12;
         float angleStep = 360f / miniEnemyCount;
 
@@ -233,7 +270,7 @@ internal class BossEnemy : Enemy, IEnemy {
             do {
                 Vector2 randomOffset = Random.insideUnitCircle * teleportRadius;
                 teleportPosition = PlayerController.Instance.transform.position + new Vector3(randomOffset.x, randomOffset.y, 0);
-            } while (!IsValidPosition(teleportPosition)); // Kiểm tra vị trí hợp lệ
+            } while (!IsValidPosition(teleportPosition));
 
             transform.position = teleportPosition;
         }
@@ -241,7 +278,7 @@ internal class BossEnemy : Enemy, IEnemy {
 
     bool IsValidPosition(Vector3 position) {
         RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero);
-        return hit.collider == null; // Chỉ teleport nếu không va vào vật cản
+        return hit.collider == null;
     }
 
 
@@ -300,7 +337,7 @@ internal class BossEnemy : Enemy, IEnemy {
                     currentRage = 0;
                 }
                 else if (currentRage == maxRage && Random.value > 0.5) {
-                    SummonWithFullRage2();
+                    SummonWithFullRage1();
                     currentRage = 0;
                 }
                 else if (Time.time >= nextTimeToUseSummon && Time.time >= nextTimeToUseSkill) {
