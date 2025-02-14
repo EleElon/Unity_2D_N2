@@ -4,15 +4,25 @@ using UnityEngine;
 internal class EnemyBulletController : MonoBehaviour {
 
     Vector3 moveDirection;
+    int maxBulletHP = 15, currentBulletHP;
     float bulletSpeed = 2.3f;
+    float timeToReturnBullet = 20f;
 
     void OnEnable() {
         StartCoroutine(TimeToReturn());
     }
 
+    void Awake() {
+        currentBulletHP = maxBulletHP;
+    }
+
     void Update() {
         if (moveDirection == Vector3.zero) return;
         transform.position += moveDirection * Time.deltaTime;
+
+        if (currentBulletHP <= 0) {
+            EnemyBulletOP.Instance?.ReturnEnemyBullet(gameObject);
+        }
     }
 
     internal void setMoveDireciton(Vector3 direction) {
@@ -24,10 +34,14 @@ internal class EnemyBulletController : MonoBehaviour {
     }
 
     IEnumerator TimeToReturn() {
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(timeToReturnBullet);
 
         if (gameObject.activeSelf) {
-            EnemyBulletOP.Instance.ReturnEnemyBullet(gameObject);
+            EnemyBulletOP.Instance?.ReturnEnemyBullet(gameObject);
         }
+    }
+
+    internal void EnemyBulletTakeDMG(int dmg) {
+        currentBulletHP -= dmg;
     }
 }

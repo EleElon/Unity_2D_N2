@@ -11,7 +11,6 @@ internal abstract class Enemy : MonoBehaviour {
 
     private void OnEnable() {
         ResetEnemyState();
-        // _enemyHPManager.ResetEnemyHPBarState();
     }
 
     protected virtual void Update() {

@@ -17,11 +17,21 @@ internal class BulletCollision : MonoBehaviour {
 
             if (enemy != null) {
                 enemy.TakeDMG(damage);
-                PlayerBulletOP.Instance.ReturnBullet(gameObject);
+                PlayerBulletOP.Instance?.ReturnBullet(gameObject);
 
                 EnemyHPManager _enemyHPManager = enemy.GetComponentInChildren<EnemyHPManager>();
 
                 _enemyHPManager.SetLastDMGTakeDMG(Time.time);
+            }
+        }
+
+        if (other.CompareTag("EnemyBullet")) {
+            EnemyBulletController _enemyBulletController = other.GetComponent<EnemyBulletController>();
+
+            if (_enemyBulletController != null) {
+                _enemyBulletController.EnemyBulletTakeDMG(damage);
+
+                PlayerBulletOP.Instance?.ReturnBullet(gameObject);
             }
         }
     }

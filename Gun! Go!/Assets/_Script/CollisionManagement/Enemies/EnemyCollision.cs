@@ -24,7 +24,7 @@ internal class EnemyCollision : MonoBehaviour {
 
     protected void IfCollisionWithBullet(Collider2D col) {
         if (col.CompareTag("Bullet")) {
-            GameObject bloods = BloodOP.Instance.GetBlood();
+            GameObject bloods = BloodOP.Instance?.GetBlood();
             bloods.transform.position = gameObject.transform.position;
         }
     }
@@ -38,7 +38,7 @@ internal class EnemyCollision : MonoBehaviour {
 
     protected virtual void DealDamage() {
         if (isCollision) {
-            PlayerController.Instance.TakeDMG(_enemy.GetDamageDeal());
+            PlayerController.Instance?.TakeDMG(_enemy.GetDamageDeal());
         }
     }
 }

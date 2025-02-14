@@ -40,10 +40,10 @@ internal class EnergyEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
-        GameObject energy = EnergyOP.Instance.GetEnergy();
+        GameObject energy = EnergyOP.Instance?.GetEnergy();
         energy.transform.position = gameObject.transform.position;
 
-        EnergyEnemyOP.Instance.ReturnEnergyEnemy(transform.parent.gameObject);
+        EnergyEnemyOP.Instance?.ReturnEnergyEnemy(transform.parent.gameObject);
     }
 
     internal override void TakeDMG(int dmg) {

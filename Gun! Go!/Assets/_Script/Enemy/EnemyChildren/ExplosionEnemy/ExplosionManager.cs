@@ -11,7 +11,7 @@ internal class ExplosionManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
 
         if (gameObject.activeSelf) {
-            ExplosionOP.Instance.ReturnExplosion(gameObject);
+            ExplosionOP.Instance?.ReturnExplosion(gameObject);
         }
     }
 }

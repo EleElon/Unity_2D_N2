@@ -7,7 +7,8 @@ internal class EnemySpawnManager : MonoBehaviour {
     internal static EnemySpawnManager Instance { get; private set; }
 
     [Header("---------- Variables ----------")]
-    [SerializeField] Transform[] spawnPosition; float timeToSpawn = 4.7f;
+    [SerializeField] Transform[] spawnPosition;
+    float timeToSpawn = 4.7f;
 
     private void Awake() {
         Instance = this;

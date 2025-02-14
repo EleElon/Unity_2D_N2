@@ -41,10 +41,10 @@ internal class ExplosionEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
-        GameObject explosion = ExplosionOP.Instance.GetExplosion();
+        GameObject explosion = ExplosionOP.Instance?.GetExplosion();
         explosion.transform.position = gameObject.transform.position;
 
-        ExplosionEnemyOP.Instance.ReturnExplosionEnemy(transform.parent.gameObject);
+        ExplosionEnemyOP.Instance?.ReturnExplosionEnemy(transform.parent.gameObject);
     }
 
     internal override void TakeDMG(int dmg) {

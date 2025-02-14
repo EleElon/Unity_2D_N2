@@ -9,9 +9,9 @@ internal class EnergyCollision : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            PlayerController.Instance.TakeEnergy(energy);
+            PlayerController.Instance?.TakeEnergy(energy);
 
-            EnergyOP.Instance.ReturnEnergy(gameObject);
+            EnergyOP.Instance?.ReturnEnergy(gameObject);
         }
     }
 }

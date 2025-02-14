@@ -5,6 +5,7 @@ using UnityEngine;
 internal class EnergyEnemyCollision : EnemyCollision {
 
     [Header("---------- Variables ----------")]
+    float timeToAttack = 1.5f;
     Coroutine attackCoroutine;
 
     [Header("---------- Components ----------")]
@@ -39,7 +40,7 @@ internal class EnergyEnemyCollision : EnemyCollision {
     IEnumerator DealDamageAfterCalculate() {
         while (isCollision) {
             yield return StartCoroutine(CalculateHit());
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(timeToAttack);
         }
     }
 
@@ -47,7 +48,7 @@ internal class EnergyEnemyCollision : EnemyCollision {
         for (int i = 0; i < _energyEnemy.GetHit(); i++) {
             if (!isCollision) yield break;
 
-            PlayerController.Instance.TakeDMG(_energyEnemy.GetDamageDeal());
+            PlayerController.Instance?.TakeDMG(_energyEnemy.GetDamageDeal());
 
             yield return new WaitForSeconds(_energyEnemy.GetDelayHit());
         }

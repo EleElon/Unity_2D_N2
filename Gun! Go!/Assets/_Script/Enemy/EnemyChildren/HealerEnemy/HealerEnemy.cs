@@ -41,12 +41,12 @@ internal class HealerEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
-        PlayerController.Instance.Heal(healValue);
+        PlayerController.Instance?.Heal(healValue);
 
-        GameObject hpBall = HPBallOP.Instance.GetHPBall();
+        GameObject hpBall = HPBallOP.Instance?.GetHPBall();
         hpBall.transform.position = transform.position;
 
-        HealerEnemyOP.Instance.ReturnHealerEnemy(transform.parent.gameObject);
+        HealerEnemyOP.Instance?.ReturnHealerEnemy(transform.parent.gameObject);
     }
 
     internal override void TakeDMG(int dmg) {

@@ -11,7 +11,8 @@ internal class GunController : MonoBehaviour {
     float rotateOffset = 180f;
     int maxBullets = 20;
     int bulletsRemaining;
-    int bulletDamage = 20;
+    int bulletDamage = 2;
+    float timeToReload = 2f;
     float shootDelay = 0.15f;
     float nextShoot;
     bool reloading;
@@ -77,9 +78,13 @@ internal class GunController : MonoBehaviour {
         //     bulletsRemaining--;
         //     // overLoad += 10;
 
-        GameObject bullet = PlayerBulletOP.Instance.GetBullet();
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        GameObject bullet = PlayerBulletOP.Instance?.GetBullet();
         bullet.transform.rotation = shootingPoint.rotation;
         bullet.transform.position = shootingPoint.position;
+
+        bullet.GetComponent<BulletsController>().SetTarget(mousePosition);
 
         BulletCollision _bulletCollision = bullet.GetComponent<BulletCollision>();
         if (_bulletCollision != null) {
@@ -102,7 +107,7 @@ internal class GunController : MonoBehaviour {
     }
 
     IEnumerator WaitToReload() {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(timeToReload);
 
         bulletsRemaining = maxBullets;
         reloading = false;

@@ -47,14 +47,14 @@ TagManager:
   - name: Ground
     uniqueID: 584265131
     locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
   - name: Grass
     uniqueID: 2298354135
     locked: 0
   - name: Rock
     uniqueID: 1962520051
-    locked: 0
-  - name: Default
-    uniqueID: 0
     locked: 0
   - name: Player
     uniqueID: 4263292831
@@ -64,6 +64,9 @@ TagManager:
     locked: 0
   - name: Bullet
     uniqueID: 2287053619
+    locked: 0
+  - name: EnemyBullet
+    uniqueID: 4015012817
     locked: 0
   - name: Blood
     uniqueID: 586684225

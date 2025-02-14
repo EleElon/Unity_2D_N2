@@ -12,7 +12,7 @@ internal class EnemyHPManager : MonoBehaviour {
 
     [Header("---------- Variables ----------")]
     float easeLerpSpeed = 0.01f;
-    float hpLerpSpeed = 1.1f;
+    float hpLerpSpeed = 0.1f;
     float timeWaitForEaseHP = 1.7f;
     float lastDMGTakeTime;
 
@@ -63,8 +63,7 @@ internal class EnemyHPManager : MonoBehaviour {
     }
 
     internal void ResetEnemyHPBarState() {
-        currentHPSlider.value = _enemy.GetEnemiesMaxHP();
-        easeHPSlider.value = _enemy.GetEnemiesMaxHP();
+        easeHPSlider.value = _enemy.GetEnemiesCurrentHP();
     }
 
     internal void SetLastDMGTakeDMG(float time) {

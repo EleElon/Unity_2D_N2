@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-internal class BossEnemy : Enemy, IEnemy {
+internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
 
     [Header("---------- Variables ----------")]
     protected override float moveSpeed { get; } = 0.25f;
@@ -34,16 +34,20 @@ internal class BossEnemy : Enemy, IEnemy {
 
     public int GetEnemiesMaxHP() => maxHP;
     public int GetEnemiesCurrentHP() => currentHP;
+    public int GetBossEnemyMaxRage() => maxRage;
+    public int GetBossEnemyRage() => currentRage;
 
     [Header("---------- Components ----------")]
     EnemyHPManager _enemyHPManager;
+    RageBarManager _rageBarManager;
     Animator _animator;
 
     private void Awake() {
         currentHP = maxHP;
-        currentRage = maxRage;
+        currentRage = 0;
 
         _enemyHPManager = GetComponentInChildren<EnemyHPManager>();
+        _rageBarManager = GetComponentInChildren<RageBarManager>();
         _animator = GetComponent<Animator>();
 
         ChooseRandomState();
@@ -87,6 +91,7 @@ internal class BossEnemy : Enemy, IEnemy {
         }
 
         FlipHPBar();
+        FlipRageBar();
     }
 
     void FlipHPBar() {
@@ -100,8 +105,22 @@ internal class BossEnemy : Enemy, IEnemy {
         }
     }
 
+    void FlipRageBar() {
+        if (PlayerController.Instance != null) {
+            if (currentRage >= 70) {
+                _rageBarManager.transform.localScale = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? -2 : 2, 0.5f, 1);
+                _rageBarManager.transform.localPosition = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? 1.611f : 1.361f, -0.499f, 3.932711f);
+            }
+            else {
+                _rageBarManager.transform.localScale = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? -2 : 2, 0.5f, 1);
+                _rageBarManager.transform.localPosition = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? 1.611f : 1.361f, -0.499f, 3.932711f);
+            }
+        }
+    }
+
     internal override void TakeDMG(int dmg) {
         currentHP -= dmg;
+        currentRage++;
     }
 
     internal override float GetMoveSpeed() {
@@ -113,10 +132,10 @@ internal class BossEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
-        GameObject usb = USB_OP.Instance.GetUSB();
+        GameObject usb = USB_OP.Instance?.GetUSB();
         usb.transform.position = transform.position;
 
-        BossEnemyOP.Instance.ReturnBossEnemy(transform.parent.gameObject);
+        BossEnemyOP.Instance?.ReturnBossEnemy(transform.parent.gameObject);
     }
 
     void NormalShoot() {
@@ -211,7 +230,7 @@ internal class BossEnemy : Enemy, IEnemy {
         int summonCount = Random.Range(1, 6);
 
         for (int i = 0; i < summonCount; i++) {
-            GameObject miniEnemy = MiniEnemyOP.Instance.GetMiniEnemy();
+            GameObject miniEnemy = MiniEnemyOP.Instance?.GetMiniEnemy();
 
             miniEnemy.transform.position = shootPosition.position;
         }
@@ -284,10 +303,12 @@ internal class BossEnemy : Enemy, IEnemy {
 
     void Healing(int hpAmount) {
         currentHP = Mathf.Min(currentHP + hpAmount, maxHP);
+        _enemyHPManager.ResetEnemyHPBarState();
     }
 
     void HealingPerValue() {
         currentHP += (int)(((float)maxHP * 0.3f) + ((float)currentHP * 0.1f));
+        _enemyHPManager.ResetEnemyHPBarState();
     }
 
     void RandomlySkillChoosing() {

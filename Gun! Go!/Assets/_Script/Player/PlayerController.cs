@@ -87,7 +87,7 @@ internal class PlayerController : MonoBehaviour {
 
     void UpdatePlayerBloodAnimation() {
         if (currentHP < checkHP) {
-            GameObject bloods = BloodOP.Instance.GetBlood();
+            GameObject bloods = BloodOP.Instance?.GetBlood();
             bloods.transform.position = gameObject.transform.position;
             checkHP = currentHP;
         }

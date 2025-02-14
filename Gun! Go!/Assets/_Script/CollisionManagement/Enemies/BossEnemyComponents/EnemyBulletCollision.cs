@@ -17,7 +17,7 @@ internal class EnemyBulletCollision : MonoBehaviour {
             if (PlayerController.Instance != null) {
                 PlayerController.Instance.TakeDMG(damage);
 
-                EnemyBulletOP.Instance.ReturnEnemyBullet(gameObject);
+                EnemyBulletOP.Instance?.ReturnEnemyBullet(gameObject);
 
                 // EnemyHPManager _enemyHPManager = enemy.GetComponentInChildren<EnemyHPManager>();
 

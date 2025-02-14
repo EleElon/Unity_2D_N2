@@ -11,7 +11,7 @@ internal class ExplosionCollison : MonoBehaviour {
         Enemy enemy = other.GetComponent<Enemy>();
 
         if (other.CompareTag("Player")) {
-            PlayerController.Instance.TakeDMG(baseDamageExplosion);
+            PlayerController.Instance?.TakeDMG(baseDamageExplosion);
         }
 
         if (other.CompareTag("Enemy")) {

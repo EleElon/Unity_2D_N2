@@ -12,7 +12,7 @@ internal class BloodManager : MonoBehaviour {
         yield return new WaitForSeconds(1.1f);
 
         if (gameObject.activeSelf) {
-            BloodOP.Instance.ReturnBlood(gameObject);
+            BloodOP.Instance?.ReturnBlood(gameObject);
         }
     }
 }
