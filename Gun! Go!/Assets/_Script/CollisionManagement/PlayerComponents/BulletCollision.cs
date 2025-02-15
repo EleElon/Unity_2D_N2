@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-internal class BulletCollision : MonoBehaviour {
+internal class BulletCollision : MonoBehaviour { //IDEA: collision with wall
 
     [Header("---------- Variables ----------")]
     int damage;

@@ -20,10 +20,10 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
     float useSkillCD = 4.5f, nextTimeToUseSkill;
     float normalShootCD = 2f, nextTimeToUseNormalShoot;
     float circleShootCD = 3.5f, nextTimeToUseCircleShoot;
-    float healingCD = 5f, nextTimeToUseHealing;
-    float healingPerValueCD = 20f, nextTimeToUseHealingPerValue;
-    float summonCD = 9f, nextTimeToUseSummon;
-    float teleportCD = 10f, nextTimeToUseTeleport;
+    float healingCD = 14.3f, nextTimeToUseHealing;
+    float healingPerValueCD = 25f, nextTimeToUseHealingPerValue;
+    float summonCD = 8.5f, nextTimeToUseSummon;
+    float teleportCD = 15f, nextTimeToUseTeleport;
 
     enum EnemyState { Idle, Moving }
     EnemyState state;
@@ -95,26 +95,22 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
     }
 
     void FlipHPBar() {
-        if (PlayerController.Instance != null) {
-            if (currentRage >= 70) {
-                _enemyHPManager.transform.localScale = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? -1 : 1, 1, 1);
-            }
-            else {
-                _enemyHPManager.transform.localScale = new Vector3(targetPosition.x < transform.position.x ? -1 : 1, 1, 1);
-            }
+        if (currentRage >= 70) {
+            _enemyHPManager.transform.localScale = new Vector3(PlayerController.Instance?.transform.position.x < transform.position.x ? -1 : 1, 1, 1);
+        }
+        else {
+            _enemyHPManager.transform.localScale = new Vector3(targetPosition.x < transform.position.x ? -1 : 1, 1, 1);
         }
     }
 
     void FlipRageBar() {
-        if (PlayerController.Instance != null) {
-            if (currentRage >= 70) {
-                _rageBarManager.transform.localScale = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? -2 : 2, 0.5f, 1);
-                _rageBarManager.transform.localPosition = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? 1.611f : 1.361f, -0.499f, 3.932711f);
-            }
-            else {
-                _rageBarManager.transform.localScale = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? -2 : 2, 0.5f, 1);
-                _rageBarManager.transform.localPosition = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? 1.611f : 1.361f, -0.499f, 3.932711f);
-            }
+        if (currentRage >= 70) {
+            _rageBarManager.transform.localScale = new Vector3(PlayerController.Instance?.transform.position.x < transform.position.x ? -2 : 2, 0.5f, 1);
+            _rageBarManager.transform.localPosition = new Vector3(PlayerController.Instance?.transform.position.x < transform.position.x ? 1.611f : 1.361f, -0.499f, 3.932711f);
+        }
+        else {
+            _rageBarManager.transform.localScale = new Vector3(targetPosition.x < transform.position.x ? -2 : 2, 0.5f, 1);
+            _rageBarManager.transform.localPosition = new Vector3(targetPosition.x < transform.position.x ? 1.611f : 1.361f, -0.499f, 3.932711f);
         }
     }
 

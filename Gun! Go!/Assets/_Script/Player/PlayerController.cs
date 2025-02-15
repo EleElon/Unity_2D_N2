@@ -10,8 +10,11 @@ internal class PlayerController : MonoBehaviour {
     Vector2 moveSpeed = Vector2.zero;
     float maxSpeed = 9f, giaToc = 5f, giaTocGiam = 15f;
     int maxHP = 100, currentHP, checkHP;
+    int maxHPBottle = 80, currentHPBottle;
     int maxEnergy = 50, currentEnergy;
     bool ismoving;
+
+    [SerializeField] LayerMask wallLayer;
 
     [Header("---------- Components ----------")]
     Rigidbody2D _rb;
@@ -26,12 +29,15 @@ internal class PlayerController : MonoBehaviour {
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
         checkHP = currentHP = maxHP;
+        currentEnergy = maxEnergy;
     }
 
     private void Update() {
+        if (GameManager.Instance.IsGameOver()) return;
         HandleMovement();
         UpdateAnimation();
         UpdatePlayerBloodAnimation();
+        HandleInput();
 
         if (currentHP <= 0) {
             Die();
@@ -41,8 +47,21 @@ internal class PlayerController : MonoBehaviour {
             currentHP = maxHP;
         }
 
+        if (currentHPBottle > maxHPBottle) {
+            currentHPBottle = maxHPBottle;
+        }
+
         if (currentEnergy > maxEnergy) {
             currentEnergy = maxEnergy;
+        }
+    }
+
+    void HandleInput() {
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            Healing();
+        }
+        else if (Input.GetKeyDown(KeyCode.E)) {
+            GunController.Instance?.StartCoroutine(GunController.Instance.RageBullet());
         }
     }
 
@@ -54,7 +73,12 @@ internal class PlayerController : MonoBehaviour {
 
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
-        Move(direction);
+        if (IsBlockedInDerection(direction)) {
+            moveSpeed = new Vector2(0.1f, 0.1f);
+        }
+        else {
+            Move(direction);
+        }
 
         transform.Translate(moveSpeed * Time.deltaTime);
 
@@ -85,6 +109,26 @@ internal class PlayerController : MonoBehaviour {
         }
     }
 
+    bool IsBlockedInDerection(Vector2 direction) {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 0.5f, wallLayer);
+        return hit.collider != null;
+    }
+
+    void Healing() {
+        if (currentHPBottle <= 0)
+            return;
+
+        int neededHP = maxHP - currentHP;
+
+        if (neededHP == 0)
+            return;
+
+        int hpTransfer = Mathf.Min(neededHP, currentHPBottle);
+
+        currentHP += hpTransfer;
+        currentHPBottle -= hpTransfer;
+    }
+
     void UpdatePlayerBloodAnimation() {
         if (currentHP < checkHP) {
             GameObject bloods = BloodOP.Instance?.GetBlood();
@@ -112,7 +156,16 @@ internal class PlayerController : MonoBehaviour {
         currentEnergy += energy;
     }
 
+    internal int GetEnergy() {
+        return currentEnergy;
+    }
+
+    internal void UsedEnergy(int energy) {
+        currentEnergy -= energy;
+    }
+
     void Die() {
         Destroy(gameObject);
+        GameManager.Instance.SetGameOver(true);
     }
 }

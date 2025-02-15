@@ -17,12 +17,36 @@ internal abstract class Enemy : MonoBehaviour {
         MoveToPlayer();
     }
 
+    // protected void MoveToPlayer() {
+    //     if (PlayerController.Instance != null) {
+    //         transform.position = Vector2.MoveTowards(transform.position, PlayerController.Instance.transform.position, GetMoveSpeed() * Time.deltaTime);
+    //         FlipEnemy();
+    //     }
+    // }
+
     protected void MoveToPlayer() {
         if (PlayerController.Instance != null) {
-            transform.position = Vector2.MoveTowards(transform.position, PlayerController.Instance.transform.position, GetMoveSpeed() * Time.deltaTime);
+            Vector2 direction = (PlayerController.Instance.transform.position - transform.position).normalized;
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 0.3f, LayerMask.GetMask("Wall"));
+
+            if (hit.collider == null) {
+                transform.position = Vector2.MoveTowards(transform.position, PlayerController.Instance.transform.position, GetMoveSpeed() * Time.deltaTime);
+            }
+            else {
+                AvoidObstacle();
+            }
+
             FlipEnemy();
         }
     }
+
+    void AvoidObstacle() {
+        Vector2 alternativeDirection = new Vector2(-1, 0);
+        transform.position += (Vector3)alternativeDirection * GetMoveSpeed() * Time.deltaTime;
+    }
+
+
     protected virtual void FlipEnemy() {
         if (PlayerController.Instance != null) {
             transform.localScale = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? -1 : 1, 1, 1);

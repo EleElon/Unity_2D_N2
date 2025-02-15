@@ -9,13 +9,15 @@ internal class GunController : MonoBehaviour {
 
     [Header("---------- Variables ----------")]
     float rotateOffset = 180f;
-    int maxBullets = 20;
-    int bulletsRemaining;
-    int bulletDamage = 2;
+    int maxBullets = 20, bulletsRemaining;
+    int bulletDamage = 2, saveBulletDMG;
     float timeToReload = 2f;
     float shootDelay = 0.15f;
     float nextShoot;
     bool reloading;
+
+    float skillCD = 27f, nextTimeToUseSkill, timeMaintain = 10f;
+    int energyCost = 30;
 
     [Header("---------- Components ----------")]
     [SerializeField] Transform shootingPoint;
@@ -55,6 +57,8 @@ internal class GunController : MonoBehaviour {
     }
 
     void GunRotation() {
+        if (GameManager.Instance.IsGamePaused() || GameManager.Instance.IsGameOver())
+            return;
         if (Input.mousePosition.x < 0 || Input.mousePosition.x > Screen.width || Input.mousePosition.y < 0 || Input.mousePosition.y > Screen.height)
             return;
 
@@ -78,6 +82,9 @@ internal class GunController : MonoBehaviour {
         //     bulletsRemaining--;
         //     // overLoad += 10;
 
+        if (GameManager.Instance.IsGamePaused() || GameManager.Instance.IsGameOver())
+            return;
+
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         GameObject bullet = PlayerBulletOP.Instance?.GetBullet();
@@ -92,6 +99,23 @@ internal class GunController : MonoBehaviour {
         }
 
         bulletsRemaining--;
+    }
+
+    internal IEnumerator RageBullet() {
+        if (Time.time >= nextTimeToUseSkill && PlayerController.Instance.GetEnergy() >= energyCost) {
+            saveBulletDMG = bulletDamage;
+            SetBuffForRageBullet();
+
+            yield return new WaitForSeconds(timeMaintain);
+
+            bulletDamage = saveBulletDMG;
+            nextTimeToUseSkill = Time.time + skillCD;
+        }
+    }
+
+    int SetBuffForRageBullet() {
+        bulletDamage = Mathf.RoundToInt(bulletDamage * 1.4f);
+        return bulletDamage;
     }
 
     IEnumerator TimeToLoadBullet() {
