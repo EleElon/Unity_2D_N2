@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-internal class BulletCollision : MonoBehaviour { //IDEA: collision with wall
+internal class BulletCollision : MonoBehaviour {
 
     [Header("---------- Variables ----------")]
     int damage;
@@ -33,6 +33,10 @@ internal class BulletCollision : MonoBehaviour { //IDEA: collision with wall
 
                 PlayerBulletOP.Instance?.ReturnBullet(gameObject);
             }
+        }
+
+        if (other.CompareTag("Wall")) {
+            PlayerBulletWithSkillOP.Instance?.ReturnBulletSkill(gameObject);
         }
     }
 }

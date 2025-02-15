@@ -9238,6 +9238,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 482721274}
+  - {fileID: 1925564710}
   m_Father: {fileID: 2081063650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &440373263
@@ -11475,7 +11476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1462409280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12754,7 +12755,7 @@ GameObject:
   - component: {fileID: 1809839147}
   m_Layer: 6
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14462,6 +14463,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossEnemyPrefabs: {fileID: 2064901155764266190, guid: 726659026bd7c4942ab46416aad0a7b4, type: 3}
+--- !u!1 &1925564709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1925564710}
+  - component: {fileID: 1925564711}
+  m_Layer: 0
+  m_Name: 'BulletSkillOP '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1925564710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925564709}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 432579502}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1925564711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925564709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80bae7f57ae87504a99521dac532a98a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSkillPrefabs: {fileID: 7968125872601477851, guid: 5c03724214db86b4cbad0499677d134d, type: 3}
 --- !u!1 &1941321792
 GameObject:
   m_ObjectHideFlags: 0
@@ -14918,9 +14964,9 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1822025381}
   - {fileID: 1659325421}
+  - {fileID: 2027417723}
+  - {fileID: 2058731769}
   - {fileID: 625803781}
   - {fileID: 440373265}
   - {fileID: 2081063650}
   - {fileID: 1462409281}
-  - {fileID: 2027417723}
-  - {fileID: 2058731769}

@@ -17,7 +17,7 @@ internal class GunController : MonoBehaviour {
     bool reloading;
 
     float skillCD = 27f, nextTimeToUseSkill, timeMaintain = 10f;
-    int energyCost = 30;
+    bool skillIsActivated = false;
 
     [Header("---------- Components ----------")]
     [SerializeField] Transform shootingPoint;
@@ -40,7 +40,7 @@ internal class GunController : MonoBehaviour {
     }
 
     void HandleShooting() {
-        if (Input.GetMouseButtonDown(0) && bulletsRemaining > 0 /*&& overLoad < 100*/ && Time.time > nextShoot && !reloading) {
+        if (Input.GetMouseButtonDown(0) && bulletsRemaining > 0 && Time.time > nextShoot && !reloading) {
             nextShoot = Time.time + shootDelay;
             Shoot();
         }
@@ -87,7 +87,7 @@ internal class GunController : MonoBehaviour {
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        GameObject bullet = PlayerBulletOP.Instance?.GetBullet();
+        GameObject bullet = skillIsActivated ? PlayerBulletWithSkillOP.Instance?.GetBulletSkill() : PlayerBulletOP.Instance?.GetBullet();
         bullet.transform.rotation = shootingPoint.rotation;
         bullet.transform.position = shootingPoint.position;
 
@@ -102,14 +102,19 @@ internal class GunController : MonoBehaviour {
     }
 
     internal IEnumerator RageBullet() {
+        int energyCost = 30;
+
         if (Time.time >= nextTimeToUseSkill && PlayerController.Instance.GetEnergy() >= energyCost) {
             saveBulletDMG = bulletDamage;
             SetBuffForRageBullet();
+            PlayerController.Instance.UsedEnergy(energyCost);
+            skillIsActivated = true;
 
             yield return new WaitForSeconds(timeMaintain);
 
             bulletDamage = saveBulletDMG;
             nextTimeToUseSkill = Time.time + skillCD;
+            skillIsActivated = false;
         }
     }
 
