@@ -30,7 +30,8 @@ internal class GunController : MonoBehaviour {
 
     private void Start() {
         bulletsRemaining = maxBullets;
-        // StartCoroutine(TimeToLoadBullet());
+
+        UIsManager.Instance.SetBulletText("" + bulletsRemaining, "/" + maxBullets);
     }
 
     private void Update() {
@@ -99,12 +100,14 @@ internal class GunController : MonoBehaviour {
         }
 
         bulletsRemaining--;
+
+        UIsManager.Instance.SetBulletText("" + bulletsRemaining, "/" + maxBullets);
     }
 
     internal IEnumerator RageBullet() {
         int energyCost = 30;
 
-        if (Time.time >= nextTimeToUseSkill && PlayerController.Instance.GetEnergy() >= energyCost) {
+        if (Time.time >= nextTimeToUseSkill && PlayerController.Instance.GetCurrentEnergy() >= energyCost) {
             saveBulletDMG = bulletDamage;
             SetBuffForRageBullet();
             PlayerController.Instance.UsedEnergy(energyCost);
@@ -140,6 +143,7 @@ internal class GunController : MonoBehaviour {
 
         bulletsRemaining = maxBullets;
         reloading = false;
+        UIsManager.Instance.SetBulletText("" + bulletsRemaining, "/" + maxBullets);
     }
 
     internal bool IsReloading() {

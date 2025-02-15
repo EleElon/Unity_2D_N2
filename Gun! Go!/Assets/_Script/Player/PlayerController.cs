@@ -14,6 +14,8 @@ internal class PlayerController : MonoBehaviour {
     int maxEnergy = 50, currentEnergy;
     bool ismoving;
 
+    int level = 1, maxExp = 60, currentExp;
+
     [SerializeField] LayerMask wallLayer;
 
     [Header("---------- Components ----------")]
@@ -30,6 +32,8 @@ internal class PlayerController : MonoBehaviour {
 
         checkHP = currentHP = maxHP;
         currentEnergy = maxEnergy;
+
+        UIsManager.Instance.SetLevelText("Lv: " + level);
     }
 
     private void Update() {
@@ -156,10 +160,6 @@ internal class PlayerController : MonoBehaviour {
         currentEnergy += energy;
     }
 
-    internal int GetEnergy() {
-        return currentEnergy;
-    }
-
     internal void UsedEnergy(int energy) {
         currentEnergy -= energy;
     }
@@ -167,5 +167,37 @@ internal class PlayerController : MonoBehaviour {
     void Die() {
         Destroy(gameObject);
         GameManager.Instance.SetGameOver(true);
+    }
+
+    internal int GetMaxHP() {
+        return maxHP;
+    }
+
+    internal int GetCurrentHP() {
+        return currentHP;
+    }
+
+    internal int GetMaxHPBottle() {
+        return maxHPBottle;
+    }
+
+    internal int GetCurrentHPBottle() {
+        return currentHPBottle;
+    }
+
+    internal int GetMaxEnergy() {
+        return maxEnergy;
+    }
+
+    internal int GetCurrentEnergy() {
+        return currentEnergy;
+    }
+
+    internal int GetMaxExp() {
+        return maxExp;
+    }
+
+    internal int GetCurrentExp() {
+        return currentExp;
     }
 }
