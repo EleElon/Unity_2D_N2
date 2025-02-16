@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-internal class GunController : MonoBehaviour {
+internal class GunController : MonoBehaviour { //IDEA: show skill CD UI
 
     internal static GunController Instance { get; private set; }
 
@@ -124,6 +124,10 @@ internal class GunController : MonoBehaviour {
     int SetBuffForRageBullet() {
         bulletDamage = Mathf.RoundToInt(bulletDamage * 1.4f);
         return bulletDamage;
+    }
+
+    float GetCoolDownRemaining() {
+        return Mathf.Max(0, skillCD - (Time.time - (nextTimeToUseSkill - skillCD))); //* nextTimeToUseSkill - skillCD: is the last time used skill
     }
 
     internal int SetBulletDamageWhenLevelUp() {

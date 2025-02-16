@@ -5,7 +5,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
 
     [Header("---------- Variables ----------")]
     protected override float moveSpeed { get; } = 0.25f;
-    protected new int damageDeal { get; set; } = 35;
+    protected new int damageDeal { get; private set; } = 35;
     int bulletDMG = 18;
     bool isMoving;
     protected int maxHP = 500;
@@ -155,7 +155,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
     internal override void Die() {
         base.Die();
 
-        GameObject usb = USB_OP.Instance?.GetUSB();
+        GameObject usb = USB_OP.Instance?.GetUSB(); //ToDo: in the future, usb can trade
         usb.transform.position = transform.position;
         CircleShootWithFullRage();
 
