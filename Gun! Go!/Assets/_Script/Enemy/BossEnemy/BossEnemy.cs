@@ -8,7 +8,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
     protected new int damageDeal { get; private set; } = 35;
     int bulletDMG = 18;
     bool isMoving;
-    protected int maxHP = 500;
+    protected int maxHP = 50;
     protected int currentHP;
 
     int maxRage = 100, currentRage;
@@ -153,7 +153,11 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
     }
 
     internal override void Die() {
-        base.Die();
+        // base.Die();
+        PlayerController.Instance?.GainExp(baseExp);
+
+        GameManager.Instance?.SetGameProgress(0);
+        EnemySpawnManager.Instance?.gameObject.SetActive(true);
 
         GameObject usb = USB_OP.Instance?.GetUSB(); //ToDo: in the future, usb can trade
         usb.transform.position = transform.position;

@@ -4,8 +4,12 @@ using UnityEngine.SceneManagement;
 
 internal class GameManager : MonoBehaviour {
     internal static GameManager Instance { get; private set; }
+
+    [Header("---------- Variables ----------")]
     bool isGamePaused = false;
     bool isGameOver = false;
+
+    int gameProgress, maxGameProgress = 50;
 
     void Awake() {
         Instance = this;
@@ -15,7 +19,13 @@ internal class GameManager : MonoBehaviour {
         HandleEscapeInput();
 
         if (!isGameOver) {
+            if (gameProgress == maxGameProgress && EnemySpawnManager.Instance.gameObject.activeSelf == true) {
+                CallBoss();
+            }
 
+            if (EnemySpawnManager.Instance?.gameObject.activeSelf == false) {
+                BossEnemyOP.Instance.GetBossEnemy();
+            }
         }
         else {
             GameOver();
@@ -46,6 +56,18 @@ internal class GameManager : MonoBehaviour {
 
             Pause(false);
         }
+    }
+
+    void CallBoss() {
+        EnemySpawnManager.Instance?.gameObject.SetActive(false);
+    }
+
+    internal void IncreGameProgress() {
+        gameProgress++;
+    }
+
+    internal int SetGameProgress(int progress) {
+        return gameProgress = progress;
     }
 
     void GameOver() {
@@ -93,5 +115,13 @@ internal class GameManager : MonoBehaviour {
 
     internal bool IsGameOver() {
         return isGameOver;
+    }
+
+    internal int GetMaxGameProgress() {
+        return maxGameProgress;
+    }
+
+    internal int GetCurrentGameProgress() {
+        return gameProgress;
     }
 }

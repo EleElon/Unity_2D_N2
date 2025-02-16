@@ -107,6 +107,7 @@ internal abstract class Enemy : MonoBehaviour {
 
     internal virtual void Die() {
         PlayerController.Instance.GainExp(baseExp);
+        GameManager.Instance?.IncreGameProgress();
     }
 
     internal abstract void TakeDMG(int dmg);

@@ -10,7 +10,7 @@ internal class GunController : MonoBehaviour { //IDEA: show skill CD UI
     [Header("---------- Variables ----------")]
     float rotateOffset = 180f;
     int maxBullets = 20, bulletsRemaining;
-    int bulletDamage = 2, saveBulletDMG;
+    int bulletDamage = 5, saveBulletDMG;
     float timeToReload = 2f;
     float shootDelay = 0.15f;
     float nextShoot;

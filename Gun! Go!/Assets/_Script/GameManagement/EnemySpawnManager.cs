@@ -8,14 +8,14 @@ internal class EnemySpawnManager : MonoBehaviour {
 
     [Header("---------- Variables ----------")]
     [SerializeField] Transform[] spawnPosition;
-    float timeToSpawn = 4.7f;
+    float timeToSpawn = 8.7f;
+
+    void OnEnable() {
+        StartCoroutine(SpawnEnemies());
+    }
 
     private void Awake() {
         Instance = this;
-    }
-
-    private void Start() {
-        StartCoroutine(SpawnEnemies());
     }
 
     IEnumerator SpawnEnemies() {
