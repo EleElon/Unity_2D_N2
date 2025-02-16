@@ -25,7 +25,12 @@ internal class PlayerController : MonoBehaviour {
     SpriteRenderer _spriteRenderer;
 
     private void Awake() {
-        Instance = this;
+        if (Instance == null) {
+            Instance = this;
+        }
+        else {
+            Destroy(gameObject);
+        }
 
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();

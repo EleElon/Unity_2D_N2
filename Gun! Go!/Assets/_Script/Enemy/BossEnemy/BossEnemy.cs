@@ -51,7 +51,9 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
         ChooseRandomState();
     }
 
-    void Awake() {
+    protected override void Awake() {
+        base.Awake();
+
         _enemyHPManager = GetComponentInChildren<EnemyHPManager>();
         _rageBarManager = GetComponentInChildren<RageBarManager>();
         _animator = GetComponent<Animator>();
@@ -96,6 +98,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
 
         FlipHPBar();
         FlipRageBar();
+        FlipEnemyLevel();
     }
 
     void FlipHPBar() {
@@ -115,6 +118,15 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
         else {
             _rageBarManager.transform.localScale = new Vector3(targetPosition.x < transform.position.x ? -2 : 2, 0.5f, 1);
             _rageBarManager.transform.localPosition = new Vector3(targetPosition.x < transform.position.x ? 1.611f : 1.361f, -0.499f, 3.932711f);
+        }
+    }
+
+    protected override void FlipEnemyLevel() {
+        if (currentRage >= 70) {
+            _enemyLevelUIManager.transform.localScale = new Vector3(PlayerController.Instance?.transform.position.x < transform.position.x ? -1 : 1, 1, 1);
+        }
+        else {
+            _enemyLevelUIManager.transform.localScale = new Vector3(targetPosition.x < transform.position.x ? -1 : 1, 1, 1);
         }
     }
 

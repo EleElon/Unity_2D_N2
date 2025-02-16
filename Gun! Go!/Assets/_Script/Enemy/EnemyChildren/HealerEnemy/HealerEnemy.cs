@@ -24,12 +24,15 @@ internal class HealerEnemy : Enemy, IEnemy {
         currentHP = maxHP;
     }
 
-    void Awake() {
+    protected override void Awake() {
+        base.Awake();
+
         _enemyHPManager = GetComponentInChildren<EnemyHPManager>();
     }
 
     protected override void Update() {
         base.Update();
+        FlipEnemyLevel();
 
         if (currentHP <= 0) {
             Die();

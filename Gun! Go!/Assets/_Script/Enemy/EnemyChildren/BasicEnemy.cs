@@ -23,7 +23,9 @@ internal class BasicEnemy : Enemy, IEnemy {
         currentHP = maxHP;
     }
 
-    void Awake() {
+    protected override void Awake() {
+        base.Awake();
+
         _enemyHPManager = GetComponentInChildren<EnemyHPManager>();
     }
 
@@ -33,6 +35,7 @@ internal class BasicEnemy : Enemy, IEnemy {
         if (currentHP <= 0) {
             Die();
         }
+        FlipEnemyLevel();
     }
 
     protected override void FlipEnemy() {

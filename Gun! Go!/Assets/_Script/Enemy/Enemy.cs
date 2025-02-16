@@ -12,13 +12,13 @@ internal abstract class Enemy : MonoBehaviour {
     protected int level, baseExp = 2;
 
     [Header("---------- Components -----------")]
-    EnemyLevelUIManager _enemyLevelUIManager;
+    protected EnemyLevelUIManager _enemyLevelUIManager;
 
     protected virtual void OnEnable() {
         if (_enemyLevelUIManager == null) {
             _enemyLevelUIManager = GetComponentInChildren<EnemyLevelUIManager>();
         }
-        
+
         ResetEnemyState();
 
         SetLevel();
@@ -29,7 +29,7 @@ internal abstract class Enemy : MonoBehaviour {
         _enemyLevelUIManager.SetEnemyLevelText("Lv: " + level);
     }
 
-    void Awake() {
+    protected virtual void Awake() {
         _enemyLevelUIManager = GetComponentInChildren<EnemyLevelUIManager>();
     }
 
@@ -73,6 +73,12 @@ internal abstract class Enemy : MonoBehaviour {
         }
     }
 
+    protected virtual void FlipEnemyLevel() {
+        if (PlayerController.Instance != null) {
+            _enemyLevelUIManager.transform.localScale = new Vector3(PlayerController.Instance.transform.position.x < transform.position.x ? -1 : 1, 1, 1);
+        }
+    }
+
     internal virtual float GetMoveSpeed() {
         return moveSpeed;
     }
@@ -82,6 +88,10 @@ internal abstract class Enemy : MonoBehaviour {
     }
 
     void SetLevel() {
+        if (PlayerController.Instance == null) {
+            level = 1;
+            return;
+        }
         int rdWhenPlayerlevelLow = Random.Range(1, 5);
         level = Random.Range(PlayerController.Instance.GetPlayerLevel() > 4 ? PlayerController.Instance.GetPlayerLevel() - 3 : rdWhenPlayerlevelLow, PlayerController.Instance.GetPlayerLevel() + 5);
     }
