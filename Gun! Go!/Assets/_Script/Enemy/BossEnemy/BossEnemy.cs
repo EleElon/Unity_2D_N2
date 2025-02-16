@@ -5,7 +5,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
 
     [Header("---------- Variables ----------")]
     protected override float moveSpeed { get; } = 0.25f;
-    protected override int damageDeal { get; } = 35;
+    protected new int damageDeal { get; set; } = 35;
     int bulletDMG = 18;
     bool isMoving;
     protected int maxHP = 500;
@@ -42,15 +42,19 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
     RageBarManager _rageBarManager;
     Animator _animator;
 
-    private void Awake() {
+    protected override void OnEnable() {
+        base.OnEnable();
+
         currentHP = maxHP;
         currentRage = 0;
 
+        ChooseRandomState();
+    }
+
+    void Awake() {
         _enemyHPManager = GetComponentInChildren<EnemyHPManager>();
         _rageBarManager = GetComponentInChildren<RageBarManager>();
         _animator = GetComponent<Animator>();
-
-        ChooseRandomState();
     }
 
     protected override void Update() {
@@ -127,9 +131,21 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
         return damageDeal;
     }
 
+    protected override int SetDamageDeal() {
+        int newDamageDeal = Mathf.RoundToInt(damageDeal + ((damageDeal + (level * 1.25f)) * 1.2f));
+        return damageDeal = newDamageDeal;
+    }
+
+    protected override int SetMaxHP() {
+        return maxHP = Mathf.RoundToInt(maxHP + (maxHP * 1.3f) + level);
+    }
+
     internal override void Die() {
+        base.Die();
+
         GameObject usb = USB_OP.Instance?.GetUSB();
         usb.transform.position = transform.position;
+        CircleShootWithFullRage();
 
         BossEnemyOP.Instance?.ReturnBossEnemy(transform.parent.gameObject);
     }

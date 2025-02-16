@@ -14,7 +14,8 @@ internal class PlayerController : MonoBehaviour {
     int maxEnergy = 50, currentEnergy;
     bool ismoving;
 
-    int level = 1, maxExp = 60, currentExp;
+    int level = 1, baseExp = 60, currentExp, checkLevel;
+    float growthRate = 1.5f;
 
     [SerializeField] LayerMask wallLayer;
 
@@ -58,6 +59,7 @@ internal class PlayerController : MonoBehaviour {
         if (currentEnergy > maxEnergy) {
             currentEnergy = maxEnergy;
         }
+        LevelUp();
     }
 
     void HandleInput() {
@@ -141,6 +143,30 @@ internal class PlayerController : MonoBehaviour {
         }
     }
 
+    void LevelUp() {
+        while (currentExp >= ExpToLevelUp(level)) {
+            currentExp -= ExpToLevelUp(level);
+
+            level++;
+            PlayerHPManager.Instance.ResetHPBarState();
+            UIsManager.Instance.SetLevelText("Lv: " + level);
+            GunController.Instance.SetBulletDamageWhenLevelUp();
+            SetHPWhenLevelUp();
+        }
+    }
+
+    int SetHPWhenLevelUp() {
+        return maxHP = Mathf.RoundToInt((maxHP + (maxHP * 1.2f) + level) + 1);
+    }
+
+    internal void GainExp(int exp) {
+        currentExp += exp;
+    }
+
+    int ExpToLevelUp(int level) {
+        return Mathf.FloorToInt(baseExp * Mathf.Pow(growthRate, level - 1));
+    }
+
     void UpdateAnimation() {
         bool isMovingAnimation = ismoving;
 
@@ -154,6 +180,10 @@ internal class PlayerController : MonoBehaviour {
     internal void Heal(int healValue) {
         currentHP += healValue;
         checkHP = currentHP;
+    }
+
+    internal void TakeHPBall(int amount) {
+        currentHPBottle += amount;
     }
 
     internal void TakeEnergy(int energy) {
@@ -194,10 +224,14 @@ internal class PlayerController : MonoBehaviour {
     }
 
     internal int GetMaxExp() {
-        return maxExp;
+        return baseExp;
     }
 
     internal int GetCurrentExp() {
         return currentExp;
+    }
+
+    internal int GetPlayerLevel() {
+        return level;
     }
 }

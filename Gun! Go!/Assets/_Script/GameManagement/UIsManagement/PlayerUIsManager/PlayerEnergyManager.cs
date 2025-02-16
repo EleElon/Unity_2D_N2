@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 internal class PlayerEnergyManager : MonoBehaviour {
 
-    [Header("---------- Elements ----------")]
+    [Header("---------- Components ----------")]
     [SerializeField] Slider currentEnergySlider;
     [SerializeField] Slider easeEnergySlider;
 

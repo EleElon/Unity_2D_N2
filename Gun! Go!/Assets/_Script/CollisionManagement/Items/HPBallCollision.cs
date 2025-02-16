@@ -9,9 +9,9 @@ internal class HPBallCollision : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            PlayerController.Instance?.Heal(healingAmount);
+            PlayerController.Instance?.TakeHPBall(healingAmount);
 
-            EnergyOP.Instance?.ReturnEnergy(gameObject);
+            HPBallOP.Instance?.ReturnHPBall(gameObject);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 internal class PlayerExpManager : MonoBehaviour {
 
-    [Header("---------- Elements ----------")]
+    [Header("---------- Components ----------")]
     [SerializeField] Slider currentExpSlider;
 
     [Header("---------- Variables ----------")]

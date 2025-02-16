@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 internal class PlayerHPBottleManager : MonoBehaviour {
 
-    [Header("---------- Elements ----------")]
+    [Header("---------- Components ----------")]
     [SerializeField] Image currentHPBottleImage;
     [SerializeField] Image easeHPBottleImage;
     [SerializeField] Slider currentHPBottleSlider;

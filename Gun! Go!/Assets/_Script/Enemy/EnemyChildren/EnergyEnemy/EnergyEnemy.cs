@@ -5,7 +5,7 @@ using UnityEngine;
 internal class EnergyEnemy : Enemy, IEnemy {
 
     [Header("---------- Variables ----------")]
-    protected override int damageDeal { get; } = 4;
+    protected new int damageDeal { get; set; } = 4;
     int hit = 3;
     float delayHit = 0.2f;
     protected int maxHP = 12;
@@ -17,9 +17,13 @@ internal class EnergyEnemy : Enemy, IEnemy {
     [Header("---------- Components ----------")]
     EnemyHPManager _enemyHPManager;
 
-    private void Awake() {
-        currentHP = maxHP;
+    protected override void OnEnable() {
+        base.OnEnable();
 
+        currentHP = maxHP;
+    }
+
+    void Awake() {
         _enemyHPManager = GetComponentInChildren<EnemyHPManager>();
     }
 
@@ -40,6 +44,8 @@ internal class EnergyEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
+        base.Die();
+
         GameObject energy = EnergyOP.Instance?.GetEnergy();
         energy.transform.position = gameObject.transform.position;
 
@@ -72,6 +78,15 @@ internal class EnergyEnemy : Enemy, IEnemy {
         if (transform.parent != null) {
             transform.parent.position = Vector2.zero;
         }
+    }
+
+    protected override int SetDamageDeal() {
+        int newDamageDeal = Mathf.RoundToInt(damageDeal + ((damageDeal + (level * 1.25f)) * 1.2f));
+        return damageDeal = newDamageDeal;
+    }
+
+    protected override int SetMaxHP() {
+        return maxHP = Mathf.RoundToInt(maxHP + (maxHP * 1.3f) + level);
     }
 
     internal int GetHit() {

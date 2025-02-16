@@ -7,7 +7,7 @@ internal class ExplosionEnemy : Enemy, IEnemy {
     [Header("---------- Variables ----------")]
     // protected float moveSpeedOfBasicEnemy = 0.2f;
     protected override float moveSpeed { get; } = 2.3f;
-    protected override int damageDeal { get; } = 0;
+    protected new int damageDeal { get; set; } = 0;
     int explosionDMG = 20;
     protected int maxHP = 15;
     protected int currentHP;
@@ -18,9 +18,13 @@ internal class ExplosionEnemy : Enemy, IEnemy {
     [Header("---------- Components ----------")]
     EnemyHPManager _enemyHPManager;
 
-    private void Awake() {
-        currentHP = maxHP;
+    protected override void OnEnable() {
+        base.OnEnable();
 
+        currentHP = maxHP;
+    }
+
+    void Awake() {
         _enemyHPManager = GetComponentInChildren<EnemyHPManager>();
     }
 
@@ -41,6 +45,8 @@ internal class ExplosionEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
+        base.Die();
+
         GameObject explosion = ExplosionOP.Instance?.GetExplosion();
         explosion.transform.position = gameObject.transform.position;
 
@@ -49,6 +55,15 @@ internal class ExplosionEnemy : Enemy, IEnemy {
 
     internal override void TakeDMG(int dmg) {
         currentHP -= dmg;
+    }
+
+    protected override int SetDamageDeal() {
+        int newDamageDeal = Mathf.RoundToInt(damageDeal + ((damageDeal + (level * 1.25f)) * 1.2f));
+        return damageDeal = newDamageDeal;
+    }
+
+    protected override int SetMaxHP() {
+        return maxHP = Mathf.RoundToInt(maxHP + (maxHP * 1.3f) + level);
     }
 
     protected override void ResetEnemyState() {

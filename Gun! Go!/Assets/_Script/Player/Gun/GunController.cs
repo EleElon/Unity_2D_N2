@@ -126,6 +126,10 @@ internal class GunController : MonoBehaviour {
         return bulletDamage;
     }
 
+    internal int SetBulletDamageWhenLevelUp() {
+        return bulletDamage = Mathf.RoundToInt(bulletDamage + (bulletDamage * 1.2f) - PlayerController.Instance.GetPlayerLevel());
+    }
+
     IEnumerator TimeToLoadBullet() {
         while (true) {
             if (bulletsRemaining < maxBullets) {

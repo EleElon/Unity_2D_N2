@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 internal class EnemyHPManager : MonoBehaviour {
 
-    [Header("---------- Elements ----------")]
+    [Header("---------- Components ----------")]
     [SerializeField] Image currentHPImage;
     [SerializeField] Image easeHPImage;
     [SerializeField] Slider currentHPSlider;
     [SerializeField] Slider easeHPSlider;
+    IEnemy _enemy;
 
     [Header("---------- Variables ----------")]
     float easeLerpSpeed = 0.01f;
@@ -16,19 +17,25 @@ internal class EnemyHPManager : MonoBehaviour {
     float timeWaitForEaseHP = 1.7f;
     float lastDMGTakeTime;
 
-    [Header("---------- Components ----------")]
-    IEnemy _enemy;
-
-    private void Awake() {
+    void OnEnable() {
         _enemy = GetComponentInParent<IEnemy>();
 
         currentHPSlider.maxValue = _enemy.GetEnemiesMaxHP();
         currentHPSlider.value = _enemy.GetEnemiesMaxHP();
         easeHPSlider.maxValue = _enemy.GetEnemiesMaxHP();
         easeHPSlider.value = _enemy.GetEnemiesMaxHP();
-
-        UpdateHPBarUI();
     }
+
+    // private void Awake() {
+    //     _enemy = GetComponentInParent<IEnemy>();
+
+    //     currentHPSlider.maxValue = _enemy.GetEnemiesMaxHP();
+    //     currentHPSlider.value = _enemy.GetEnemiesMaxHP();
+    //     easeHPSlider.maxValue = _enemy.GetEnemiesMaxHP();
+    //     easeHPSlider.value = _enemy.GetEnemiesMaxHP();
+
+    //     UpdateHPBarUI();
+    // }
 
     private void FixedUpdate() {
         if (currentHPSlider.value != _enemy.GetEnemiesCurrentHP()) {

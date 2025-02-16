@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 internal class PlayerHPManager : MonoBehaviour {
 
-    [Header("---------- Elements ----------")]
+    internal static PlayerHPManager Instance { get; private set; }
+
+    [Header("---------- Components ----------")]
     [SerializeField] Image currentHPImage;
     [SerializeField] Image easeHPImage;
     [SerializeField] Slider currentHPSlider;
@@ -17,6 +19,7 @@ internal class PlayerHPManager : MonoBehaviour {
     float lastDMGTakeTime;
 
     private void Awake() {
+        Instance = this;
 
         currentHPSlider.maxValue = PlayerController.Instance.GetMaxHP();
         currentHPSlider.value = PlayerController.Instance.GetCurrentHP();
@@ -58,8 +61,9 @@ internal class PlayerHPManager : MonoBehaviour {
         }
     }
 
-    internal void ResetEnemyHPBarState() {
-        easeHPSlider.value = PlayerController.Instance.GetCurrentHP();
+    internal void ResetHPBarState() {
+        currentHPSlider.maxValue = PlayerController.Instance.GetMaxHP();
+        easeHPSlider.maxValue = PlayerController.Instance.GetMaxHP();
     }
 
     internal void SetLastDMGTakeDMG(float time) {

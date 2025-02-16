@@ -9,8 +9,28 @@ internal abstract class Enemy : MonoBehaviour {
     // protected float moveSpeed = 3f;
     protected virtual int damageDeal { get; } = 10;
 
-    private void OnEnable() {
+    protected int level, baseExp = 2;
+
+    [Header("---------- Components -----------")]
+    EnemyLevelUIManager _enemyLevelUIManager;
+
+    protected virtual void OnEnable() {
+        if (_enemyLevelUIManager == null) {
+            _enemyLevelUIManager = GetComponentInChildren<EnemyLevelUIManager>();
+        }
+        
         ResetEnemyState();
+
+        SetLevel();
+        SetBaseExp();
+        SetDamageDeal();
+        SetMaxHP();
+
+        _enemyLevelUIManager.SetEnemyLevelText("Lv: " + level);
+    }
+
+    void Awake() {
+        _enemyLevelUIManager = GetComponentInChildren<EnemyLevelUIManager>();
     }
 
     protected virtual void Update() {
@@ -61,11 +81,23 @@ internal abstract class Enemy : MonoBehaviour {
         return damageDeal;
     }
 
-    // internal virtual void Die() {
-    //     Destroy(gameObject);
-    // }
+    void SetLevel() {
+        int rdWhenPlayerlevelLow = Random.Range(1, 5);
+        level = Random.Range(PlayerController.Instance.GetPlayerLevel() > 4 ? PlayerController.Instance.GetPlayerLevel() - 3 : rdWhenPlayerlevelLow, PlayerController.Instance.GetPlayerLevel() + 5);
+    }
 
-    internal abstract void Die();
+    int SetBaseExp() {
+        baseExp = Mathf.RoundToInt(baseExp + (baseExp * 1.1f));
+        return baseExp;
+    }
+
+    internal int GetEnemyLevel() {
+        return level;
+    }
+
+    internal virtual void Die() {
+        PlayerController.Instance.GainExp(baseExp);
+    }
 
     internal abstract void TakeDMG(int dmg);
 
@@ -74,4 +106,8 @@ internal abstract class Enemy : MonoBehaviour {
     protected abstract void ResetGameObjectPosition();
 
     protected abstract void ResetParentGameObjectPosition();
+
+    protected abstract int SetDamageDeal();
+
+    protected abstract int SetMaxHP();
 }

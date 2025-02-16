@@ -7,7 +7,7 @@ internal class BasicEnemy : Enemy, IEnemy {
     [Header("---------- Variables ----------")]
     protected override float moveSpeed { get; } = 0.7f;
     // protected float moveSpeedOfBasicEnemy = 0.2f;
-    protected override int damageDeal { get; } = 8;
+    protected new int damageDeal { get; set; } = 8;
     protected int maxHP = 30;
     protected int currentHP;
 
@@ -17,9 +17,13 @@ internal class BasicEnemy : Enemy, IEnemy {
     [Header("---------- Components ----------")]
     EnemyHPManager _enemyHPManager;
 
-    private void Awake() {
-        currentHP = maxHP;
+    protected override void OnEnable() {
+        base.OnEnable();
 
+        currentHP = maxHP;
+    }
+
+    void Awake() {
         _enemyHPManager = GetComponentInChildren<EnemyHPManager>();
     }
 
@@ -52,7 +56,18 @@ internal class BasicEnemy : Enemy, IEnemy {
     }
 
     internal override void Die() {
+        base.Die();
+
         BasicEnemyOP.Instance.ReturnBasicEnemy(transform.parent.gameObject);
+    }
+
+    protected override int SetDamageDeal() {
+        int newDamageDeal = Mathf.RoundToInt(damageDeal + ((damageDeal + (level * 1.25f)) * 1.2f));
+        return damageDeal = newDamageDeal;
+    }
+
+    protected override int SetMaxHP() {
+        return maxHP = Mathf.RoundToInt(maxHP + (maxHP * 1.3f) + level);
     }
 
     protected override void ResetEnemyState() {
