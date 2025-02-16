@@ -53,4 +53,8 @@ internal class EnemySpawnManager : MonoBehaviour {
     void SetSpawnPoint(GameObject obj, Transform pos) {
         obj.transform.position = pos.position;
     }
+
+    internal float SetTimeSpawner(float amount) {
+        return timeToSpawn -= amount;
+    }
 }

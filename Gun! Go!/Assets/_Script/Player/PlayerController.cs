@@ -156,6 +156,7 @@ internal class PlayerController : MonoBehaviour {
             PlayerHPManager.Instance.ResetHPBarState();
             UIsManager.Instance.SetLevelText("Lv: " + level);
             GunController.Instance.SetBulletDamageWhenLevelUp();
+            EnemySpawnManager.Instance?.SetTimeSpawner(0.2f);
             SetHPWhenLevelUp();
         }
     }
