@@ -449,8 +449,8 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
 
     protected override void ResetEnemyState() {
         currentHP = maxHP;
-        // ResetParentGameObjectPosition();
-        // ResetGameObjectPosition();
+        ResetParentGameObjectPosition();
+        ResetGameObjectPosition();
     }
 
     protected override void ResetGameObjectPosition() {

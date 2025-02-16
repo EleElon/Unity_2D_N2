@@ -57,6 +57,9 @@ TagManager:
   - name: Rock
     uniqueID: 1962520051
     locked: 0
+  - name: Tree
+    uniqueID: 3238527965
+    locked: 0
   - name: Player
     uniqueID: 4263292831
     locked: 0
@@ -74,9 +77,6 @@ TagManager:
     locked: 0
   - name: Gun
     uniqueID: 2133776685
-    locked: 0
-  - name: Tree
-    uniqueID: 3238527965
     locked: 0
   - name: Item
     uniqueID: 1956983437
