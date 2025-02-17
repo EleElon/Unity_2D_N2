@@ -38,6 +38,7 @@ internal class PlayerController : MonoBehaviour {
 
         checkHP = currentHP = maxHP;
         currentEnergy = maxEnergy;
+        currentHPBottle = 50;
 
         UIsManager.Instance.SetLevelText("Lv: " + level);
     }
@@ -154,7 +155,6 @@ internal class PlayerController : MonoBehaviour {
             currentExp -= ExpToLevelUp(level);
 
             level++;
-            PlayerHPManager.Instance.ResetHPBarState();
             UIsManager.Instance.SetLevelText("Lv: " + level);
             GunController.Instance.SetBulletDamageWhenLevelUp();
 
@@ -163,6 +163,8 @@ internal class PlayerController : MonoBehaviour {
             }
 
             SetHPWhenLevelUp();
+            currentHP = maxHP;
+            PlayerHPManager.Instance.ResetHPBarState();
         }
     }
 
