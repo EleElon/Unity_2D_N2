@@ -93,7 +93,7 @@ internal class GameManager : MonoBehaviour {
     }
 
     public void BackToMenu() {
-
+        SceneManager.LoadScene("MenuGame");
     }
 
     void Pause(bool state) {
