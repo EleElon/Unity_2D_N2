@@ -84854,7 +84854,7 @@ MonoBehaviour:
   outOfBulletSound: {fileID: 8300000, guid: cf05dd5f2506d5d46a632b6bf661db3d, type: 3}
   healingSound: {fileID: 8300000, guid: 4388b56eb79ac9547a3d231f2aa99a94, type: 3}
   deathSound: {fileID: 8300000, guid: cbda3370fee99d34981b71e4b9e18625, type: 3}
-  itemSound: {fileID: 0}
+  itemSound: {fileID: 8300000, guid: abf78ba6a3c3bfe42b9d22bdff1fb297, type: 3}
   bulletHittingSound: {fileID: 8300000, guid: 1c279ada1eb6d1d4591f7866448bb932, type: 3}
   bulletHittingWithWallSound: {fileID: 8300000, guid: 391d1b57fff58e241954d009622c7c4d, type: 3}
   enemyHittingSound: {fileID: 8300000, guid: 0f84ce2f676bdac43a10e8208b9830d1, type: 3}
