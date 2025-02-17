@@ -26,7 +26,12 @@ internal class BulletsController : MonoBehaviour {
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
         if (Vector2.Distance(transform.position, targetPosition) < 0.001f) {
-            PlayerBulletOP.Instance?.ReturnBullet(gameObject);
+            if (gameObject.activeSelf && GunController.Instance.GunSkillIsActivated()) {
+                PlayerBulletWithSkillOP.Instance?.ReturnBulletSkill(gameObject);
+            }
+            else if (gameObject.activeSelf && !GunController.Instance.GunSkillIsActivated()) {
+                PlayerBulletOP.Instance?.ReturnBullet(gameObject);
+            }
         }
     }
 
@@ -37,7 +42,10 @@ internal class BulletsController : MonoBehaviour {
     IEnumerator TimeToDestroy() {
         yield return new WaitForSeconds(4f);
 
-        if (gameObject.activeSelf) {
+        if (gameObject.activeSelf && GunController.Instance.GunSkillIsActivated()) {
+            PlayerBulletWithSkillOP.Instance?.ReturnBulletSkill(gameObject);
+        }
+        else if (gameObject.activeSelf && !GunController.Instance.GunSkillIsActivated()) {
             PlayerBulletOP.Instance?.ReturnBullet(gameObject);
         }
     }

@@ -162,4 +162,8 @@ internal class GunController : MonoBehaviour { //IDEA: show skill CD UI
     internal bool IsReloading() {
         return reloading;
     }
+
+    internal bool GunSkillIsActivated() {
+        return skillIsActivated;
+    }
 }

@@ -17,7 +17,12 @@ internal class BulletCollision : MonoBehaviour {
 
             if (enemy != null) {
                 enemy.TakeDMG(damage);
-                PlayerBulletOP.Instance?.ReturnBullet(gameObject);
+                if (GunController.Instance.GunSkillIsActivated()) {
+                    PlayerBulletWithSkillOP.Instance?.ReturnBulletSkill(gameObject);
+                }
+                else if (!GunController.Instance.GunSkillIsActivated()) {
+                    PlayerBulletOP.Instance?.ReturnBullet(gameObject);
+                }
 
                 EnemyHPManager _enemyHPManager = enemy.GetComponentInChildren<EnemyHPManager>();
 
@@ -31,12 +36,22 @@ internal class BulletCollision : MonoBehaviour {
             if (_enemyBulletController != null) {
                 _enemyBulletController.EnemyBulletTakeDMG(damage);
 
-                PlayerBulletOP.Instance?.ReturnBullet(gameObject);
+                if (GunController.Instance.GunSkillIsActivated()) {
+                    PlayerBulletWithSkillOP.Instance?.ReturnBulletSkill(gameObject);
+                }
+                else if (!GunController.Instance.GunSkillIsActivated()) {
+                    PlayerBulletOP.Instance?.ReturnBullet(gameObject);
+                }
             }
         }
 
         if (other.CompareTag("Wall")) {
-            PlayerBulletWithSkillOP.Instance?.ReturnBulletSkill(gameObject);
+            if (GunController.Instance.GunSkillIsActivated()) {
+                PlayerBulletWithSkillOP.Instance?.ReturnBulletSkill(gameObject);
+            }
+            else if (!GunController.Instance.GunSkillIsActivated()) {
+                PlayerBulletOP.Instance?.ReturnBullet(gameObject);
+            }
 
             AudioManager.Instance.PlaySFX(AudioManager.Instance.GetBulletHittingWithWallSound());
         }
