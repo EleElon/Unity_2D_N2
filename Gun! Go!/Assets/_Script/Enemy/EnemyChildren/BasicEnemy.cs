@@ -48,6 +48,7 @@ internal class BasicEnemy : Enemy, IEnemy {
 
     internal override void TakeDMG(int dmg) {
         currentHP -= dmg;
+        GetHittingSound();
     }
 
     internal override float GetMoveSpeed() {

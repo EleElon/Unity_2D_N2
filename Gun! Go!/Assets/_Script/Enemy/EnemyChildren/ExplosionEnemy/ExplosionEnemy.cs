@@ -53,11 +53,14 @@ internal class ExplosionEnemy : Enemy, IEnemy {
         GameObject explosion = ExplosionOP.Instance?.GetExplosion();
         explosion.transform.position = gameObject.transform.position;
 
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetExplosionSound());
+
         ExplosionEnemyOP.Instance?.ReturnExplosionEnemy(transform.parent.gameObject);
     }
 
     internal override void TakeDMG(int dmg) {
         currentHP -= dmg;
+        GetHittingSound();
     }
 
     protected override int SetDamageDeal() {

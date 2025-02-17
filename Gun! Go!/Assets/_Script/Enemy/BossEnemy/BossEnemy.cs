@@ -49,6 +49,8 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
         currentRage = 0;
 
         ChooseRandomState();
+
+        StartCoroutine(AudioManager.Instance.FadeOutAndChangeMusic(1));
     }
 
     protected override void Awake() {
@@ -133,6 +135,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
     internal override void TakeDMG(int dmg) {
         currentHP -= dmg;
         currentRage++;
+        GetHittingSound();
     }
 
     internal override float GetMoveSpeed() {
@@ -153,8 +156,10 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
     }
 
     internal override void Die() {
-        // base.Die();
-        PlayerController.Instance?.GainExp(baseExp);
+        base.Die();
+        // PlayerController.Instance?.GainExp(baseExp);
+
+        StartCoroutine(AudioManager.Instance.FadeOutAndChangeMusic(0));
 
         GameManager.Instance?.SetGameProgress(0);
         EnemySpawnManager.Instance?.gameObject.SetActive(true);
@@ -181,6 +186,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
             _enemyBulletController.setMoveDireciton(directionToPlayer * _enemyBulletController.GetBulletSpeed());
 
             bullet.transform.position = shootPosition.position;
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.GetEnemyBulletSound());
         }
     }
 
@@ -201,6 +207,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
                 _enemyBulletController.setMoveDireciton(directionToPlayer * _enemyBulletController.GetBulletSpeed());
 
                 bullet.transform.position = shootPosition.position;
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.GetEnemyBulletSound());
 
                 yield return new WaitForSeconds(0.2f);
             }
@@ -226,6 +233,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
 
             bullet.transform.position = gameObject.transform.position;
         }
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetEnemyBulletMaxRageSound());
     }
 
     IEnumerator CircleShootWithFullRage() {
@@ -252,6 +260,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
             }
             yield return new WaitForSeconds(i < 2 ? 1.3f : 2.7f);
         }
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetEnemyBulletMaxRageSound());
     }
 
     void Summon() {
@@ -262,6 +271,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
 
             miniEnemy.transform.position = shootPosition.position;
         }
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetEnemySummonSound());
     }
 
     IEnumerator SummonWithFullRage() {
@@ -288,6 +298,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
             }
             if (enemy != null) {
                 enemy.transform.position = shootPosition.position;
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.GetEnemySummonSound());
             }
             yield return new WaitForSeconds(1.2f);
         }
@@ -307,6 +318,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
 
             miniEnemy.transform.position = gameObject.transform.position + miniEnemyDirection * 2f;
         }
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetEnemySummonSound());
     }
 
     void TelePort() {
@@ -320,6 +332,7 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
             } while (!IsValidPosition(teleportPosition));
 
             transform.position = teleportPosition;
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.GetTelePortSound());
         }
     }
 
@@ -332,11 +345,13 @@ internal class BossEnemy : Enemy, IEnemy, IBossEnemy {
     void Healing(int hpAmount) {
         currentHP = Mathf.Min(currentHP + hpAmount, maxHP);
         _enemyHPManager.ResetEnemyHPBarState();
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetHealingSound());
     }
 
     void HealingPerValue() {
         currentHP += (int)(((float)maxHP * 0.3f) + ((float)currentHP * 0.1f));
         _enemyHPManager.ResetEnemyHPBarState();
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetHealingSound());
     }
 
     void RandomlySkillChoosing() {

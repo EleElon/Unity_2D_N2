@@ -12,10 +12,14 @@ internal class ExplosionCollison : MonoBehaviour {
 
         if (other.CompareTag("Player")) {
             PlayerController.Instance?.TakeDMG(baseDamageExplosion);
+
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.GetBulletHittingSound());
         }
 
         if (other.CompareTag("Enemy")) {
             enemy.TakeDMG(baseDamageExplosion);
+
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.GetBulletHittingSound());
         }
     }
 }

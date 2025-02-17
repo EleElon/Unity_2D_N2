@@ -19,6 +19,8 @@ internal class EnemyBulletCollision : MonoBehaviour {
 
                 EnemyBulletOP.Instance?.ReturnEnemyBullet(gameObject);
 
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.GetBulletHittingSound());
+
                 // EnemyHPManager _enemyHPManager = enemy.GetComponentInChildren<EnemyHPManager>();
 
                 // _enemyHPManager.SetLastDMGTakeDMG(Time.time);

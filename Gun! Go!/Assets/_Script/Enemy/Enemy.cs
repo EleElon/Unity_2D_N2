@@ -108,6 +108,11 @@ internal abstract class Enemy : MonoBehaviour {
     internal virtual void Die() {
         PlayerController.Instance.GainExp(baseExp);
         GameManager.Instance?.IncreGameProgress();
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetDeathSound());
+    }
+
+    protected void GetHittingSound() {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetBulletHittingSound());
     }
 
     internal abstract void TakeDMG(int dmg);

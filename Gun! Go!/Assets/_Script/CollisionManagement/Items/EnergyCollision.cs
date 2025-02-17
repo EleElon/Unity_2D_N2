@@ -12,6 +12,8 @@ internal class EnergyCollision : MonoBehaviour {
             PlayerController.Instance?.TakeEnergy(energy);
 
             EnergyOP.Instance?.ReturnEnergy(gameObject);
+
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.GetItemSound());
         }
     }
 }

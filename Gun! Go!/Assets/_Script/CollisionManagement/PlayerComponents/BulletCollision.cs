@@ -37,6 +37,8 @@ internal class BulletCollision : MonoBehaviour {
 
         if (other.CompareTag("Wall")) {
             PlayerBulletWithSkillOP.Instance?.ReturnBulletSkill(gameObject);
+
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.GetBulletHittingWithWallSound());
         }
     }
 }

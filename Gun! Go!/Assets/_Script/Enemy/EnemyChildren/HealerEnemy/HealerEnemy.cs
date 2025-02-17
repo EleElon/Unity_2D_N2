@@ -60,6 +60,7 @@ internal class HealerEnemy : Enemy, IEnemy {
 
     internal override void TakeDMG(int dmg) {
         currentHP -= dmg;
+        GetHittingSound();
     }
 
     protected override int SetDamageDeal() {

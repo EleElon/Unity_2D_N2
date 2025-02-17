@@ -45,6 +45,9 @@ internal class GunController : MonoBehaviour { //IDEA: show skill CD UI
             nextShoot = Time.time + shootDelay;
             Shoot();
         }
+        else if (Input.GetMouseButtonDown(0) && bulletsRemaining == 0) {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.GetOutOfBulletSound());
+        }
     }
 
     void HandleReload() {
@@ -53,6 +56,7 @@ internal class GunController : MonoBehaviour { //IDEA: show skill CD UI
                 return;
 
             reloading = true;
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.GetReloadSound());
             StartCoroutine(WaitToReload());
         }
     }
@@ -100,6 +104,7 @@ internal class GunController : MonoBehaviour { //IDEA: show skill CD UI
         }
 
         bulletsRemaining--;
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetShootingSound());
 
         UIsManager.Instance.SetBulletText("" + bulletsRemaining, "/" + maxBullets);
     }

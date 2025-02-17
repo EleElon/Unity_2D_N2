@@ -12,6 +12,7 @@ internal class HPBallCollision : MonoBehaviour {
             PlayerController.Instance?.TakeHPBall(healingAmount);
 
             HPBallOP.Instance?.ReturnHPBall(gameObject);
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.GetItemSound());
         }
     }
 }

@@ -69,7 +69,7 @@ internal class PlayerController : MonoBehaviour {
 
     void HandleInput() {
         if (Input.GetKeyDown(KeyCode.Q)) {
-            Healing();
+            HealingSkill();
         }
         else if (Input.GetKeyDown(KeyCode.E)) {
             GunController.Instance?.StartCoroutine(GunController.Instance.RageBullet());
@@ -125,7 +125,7 @@ internal class PlayerController : MonoBehaviour {
         return hit.collider != null;
     }
 
-    void Healing() {
+    void HealingSkill() {
         if (currentHPBottle <= 0)
             return;
 
@@ -138,6 +138,7 @@ internal class PlayerController : MonoBehaviour {
 
         currentHP += hpTransfer;
         currentHPBottle -= hpTransfer;
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetHealingSound());
     }
 
     void UpdatePlayerBloodAnimation() {
@@ -156,7 +157,11 @@ internal class PlayerController : MonoBehaviour {
             PlayerHPManager.Instance.ResetHPBarState();
             UIsManager.Instance.SetLevelText("Lv: " + level);
             GunController.Instance.SetBulletDamageWhenLevelUp();
-            EnemySpawnManager.Instance?.SetTimeSpawner(0.2f);
+
+            if (EnemySpawnManager.Instance.GetTimeSpawner() >= 2.8f) {
+                EnemySpawnManager.Instance?.SetTimeSpawner(0.2f);
+            }
+
             SetHPWhenLevelUp();
         }
     }
@@ -186,6 +191,7 @@ internal class PlayerController : MonoBehaviour {
     internal void Heal(int healValue) {
         currentHP += healValue;
         checkHP = currentHP;
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetHealingSound());
     }
 
     internal void TakeHPBall(int amount) {
@@ -203,6 +209,7 @@ internal class PlayerController : MonoBehaviour {
     void Die() {
         Destroy(gameObject);
         GameManager.Instance.SetGameOver(true);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GetDeathSound());
     }
 
     internal int GetMaxHP() {

@@ -50,6 +50,8 @@ internal class EnergyEnemyCollision : EnemyCollision {
 
             PlayerController.Instance?.TakeDMG(_energyEnemy.GetDamageDeal());
 
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.GetEnemyHittingSound());
+
             yield return new WaitForSeconds(_energyEnemy.GetDelayHit());
         }
     }

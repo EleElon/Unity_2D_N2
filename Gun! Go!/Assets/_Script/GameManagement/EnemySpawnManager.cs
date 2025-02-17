@@ -8,7 +8,7 @@ internal class EnemySpawnManager : MonoBehaviour {
 
     [Header("---------- Variables ----------")]
     [SerializeField] Transform[] spawnPosition;
-    float timeToSpawn = 8.7f;
+    float timeToSpawn = 9f;
 
     void OnEnable() {
         StartCoroutine(SpawnEnemies());
@@ -56,5 +56,9 @@ internal class EnemySpawnManager : MonoBehaviour {
 
     internal float SetTimeSpawner(float amount) {
         return timeToSpawn -= amount;
+    }
+
+    internal float GetTimeSpawner() {
+        return timeToSpawn;
     }
 }

@@ -39,6 +39,8 @@ internal class EnemyCollision : MonoBehaviour {
     protected virtual void DealDamage() {
         if (isCollision) {
             PlayerController.Instance?.TakeDMG(_enemy.GetDamageDeal());
+
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.GetEnemyHittingSound());
         }
     }
 }
